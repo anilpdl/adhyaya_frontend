@@ -1,0 +1,39 @@
+.reef-gradient {
+  @include linear-gradient-background(40deg, #00d2ff 0, #3a7bd5 100%);
+}
+
+.nelson-gradient {
+  @include linear-gradient-background(40deg, #f2709c 0, #ff9472 100%);
+}
+
+.salmon-gradient {
+  @include linear-gradient-background(40deg, #FC5C7D 0, #ef8e38 100%);
+}
+
+.mojito-gradient {
+  @include linear-gradient-background(40deg, #93F9B9 0, #1D976C 100%);
+}
+
+.delicate-gradient {
+  @include linear-gradient-background(40deg, #26D0CE 0, #D3CCE3 100%);
+}
+
+.emarald-water-gradient {
+  @include linear-gradient-background(40deg, #348F50 0, #56B4D3 100%);
+}
+
+.react-gradient {
+  @include linear-gradient-background(40deg, #55D1F5 0, #6dd5ed 100%);
+}
+
+.postgres-gradient {
+  @include linear-gradient-background(40deg, #385E8C 0, #1CB5E0 100%);
+}
+
+.redux-gradient {
+  @include linear-gradient-background(40deg, #8500BC 0, #baa1c9 100%);
+}
+
+.redis-gradient {
+  @include linear-gradient-background(40deg, #DF0009 0, #A90000 100%);
+}

@@ -1,0 +1,47 @@
+//put all animations related css here
+$color: map-get($brand-color-primary, 'light');
+
+.circle-ripple {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  background-color: #ffdddd;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  animation: ripple 1.5s linear infinite;
+}
+
+@keyframes ripple {
+  0% {
+    box-shadow: 0 0 0 0 rgba($color, 0.3),
+    0 0 0 4px rgba($color, 0.3),
+    0 0 0 12px rgba($color, 0.3),
+    0 0 0 20px rgba($color, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 0 4px rgba($color, 0.3),
+    0 0 0 12px rgba($color, 0.3),
+    0 0 0 20px rgba($color, 0.3),
+    0 0 0 32px rgba($color, 0);
+  }
+}
+
+//floating images
+@keyframes floating{
+  0% {
+    @include transform(rotate(0deg) translate(-10px) rotate(0deg));
+  }
+  100% {
+    @include transform(rotate(360deg) translate(-10px) rotate(-360deg));
+  }
+}
+
+@-webkit-keyframes floating{
+  0% {
+    @include transform(rotate(0deg) translate(-10px) rotate(0deg));
+  }
+  100% {
+    @include transform(rotate(360deg) translate(-10px) rotate(-360deg));
+  }
+}

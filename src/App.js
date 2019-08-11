@@ -6,7 +6,7 @@ import Header from './containers/Header';
 import ROUTES from './constants/Routes';
 import Footer from './containers/Footer';
 
-const HeadRoute = ({ component: Component, rest }) => {
+const RouteWrapper = ({ component: Component, rest }) => {
     return (
         <Route {...rest}
             render={(props) => <Fragment>
@@ -22,7 +22,7 @@ const App = () => {
     return (
         <div className="App">
             <BrowserRouter>
-                <HeadRoute path={ROUTES.INDEX} component={Home} />
+                <RouteWrapper path={ROUTES.INDEX} component={Home} />
             </BrowserRouter>
         </div>
     );
