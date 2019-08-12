@@ -35,7 +35,7 @@ a {
 
   &:hover {
     text-decoration: none;
-    color: map-get($brand-color-primary, 'dark');
+    color: map-get($color-primary, 'dark');
     outline-width: 0;
   }
 

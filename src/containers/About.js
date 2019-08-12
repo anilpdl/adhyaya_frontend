@@ -2,7 +2,7 @@ import React from 'react';
 
 import logo from 'assets/img/logo.png';
 
-class Home extends React.Component {
+class About extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -13,11 +13,11 @@ class Home extends React.Component {
   render() {
     return(
       <div className="container">
-        Home page
+        About page
         <img src={logo} />
       </div>
     )
   }
 }
 
-export default Home;
+export default About;
