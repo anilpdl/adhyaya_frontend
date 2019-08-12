@@ -7,6 +7,7 @@ import ROUTES from './constants/Routes';
 import Footer from './containers/Footer';
 import About from './containers/About';
 import Contact from './containers/Contact';
+import LogIn from './containers/LogIn';
 
 const RouteWrapper = ({ component: Component, ...rest }) => {
     return (
@@ -27,6 +28,7 @@ const App = () => {
                 <RouteWrapper exact path={ROUTES.INDEX} component={Home} />
                 <RouteWrapper path={ROUTES.ABOUT_US} component={About} />
                 <RouteWrapper path={ROUTES.CONTACT_US} component={Contact} />
+                <RouteWrapper path={ROUTES.LOGIN} component={LogIn} />
             </BrowserRouter>
         </div>
     );
