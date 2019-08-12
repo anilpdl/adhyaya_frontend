@@ -118,7 +118,7 @@
   }
 
   &.inbox__label-color--blue {
-    background-color: $color-blue;
+    background-color: $color-primary;
   }
 
   &.inbox__label-color--yellow {
@@ -516,7 +516,7 @@
   color: $color-additional;
 
   span {
-    color: $color-blue;
+    color: $color-primary;
   }
 }
 
@@ -535,13 +535,13 @@
 .inbox__email-reply-btn-full {
   border: none;
   background: transparent;
-  color: $color-blue;
+  color: $color-primary;
   transition: all 0.3s;
   cursor: pointer;
   min-height: 32px;
 
   &:hover {
-    color: $color-blue-hover;
+    color: $color-primary-hover;
   }
 }
 

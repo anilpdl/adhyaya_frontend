@@ -35,11 +35,11 @@
   }
 
   &.alert-info {
-    background-color: $color-blue;
-    border-color: $color-blue;
+    background-color: $color-primary;
+    border-color: $color-primary;
 
     &.alert--bordered .alert__icon {
-      background-color: $color-blue;
+      background-color: $color-primary;
     }
 
     &.alert--colored .alert__icon {
@@ -47,7 +47,7 @@
     }
 
     &.alert--neutral .alert__icon svg {
-      fill: $color-blue;
+      fill: $color-primary;
     }
   }
 

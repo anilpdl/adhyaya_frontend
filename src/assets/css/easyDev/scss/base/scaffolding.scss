@@ -21,15 +21,11 @@ ul, ol {
 }
 
 a {
-  color: $color-blue;
+  color: $color-primary;
   transition: all 0.3s;
 
   &:hover {
     text-decoration: none;
-    color: $color-blue-hover;
+    color: $color-primary-hover;
   }
-}
-
-img {
-  width: 100%;
 }

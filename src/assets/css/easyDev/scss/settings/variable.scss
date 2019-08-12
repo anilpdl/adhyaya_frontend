@@ -51,9 +51,9 @@ $themes: (
   @return map-get($theme-map, $key);
 }
 
-$color-accent: #4ce1b6;
+$color-accent: #6ec8e6;
 $color-accent-hover: darken($color-accent, 10%);
-$color-additional: #999999;
+$color-additional: #48ad37;
 $color-additional-hover: darken($color-additional, 10%);
 
 $color-yellow: #f6da6e;
@@ -64,7 +64,7 @@ $color-violet: #c88ffa;
 $color-red: #ff4861;
 $color-red-hover: darken($color-red, 10%);
 
-$color-blue: #70bbfd;
-$color-blue-hover: darken($color-blue, 10%);
+$color-primary: #e98121;
+$color-primary-hover: darken($color-primary, 10%);
 
 $color-gray: #787985;

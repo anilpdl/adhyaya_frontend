@@ -68,7 +68,7 @@
 .modal-dialog--primary {
 
   .modal__title-icon {
-    color: $color-blue;
+    color: $color-primary;
   }
 }
 
@@ -123,7 +123,7 @@
   }
 
   &.modal-dialog--primary .modal-content {
-    background-color: $color-blue;
+    background-color: $color-primary;
   }
 
   &.modal-dialog--success .modal-content {
@@ -175,7 +175,7 @@
   }
 
   &.modal-dialog--primary .modal__header {
-    background-color: $color-blue;
+    background-color: $color-primary;
   }
 
   &.modal-dialog--success .modal__header {

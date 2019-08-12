@@ -1,6 +1,6 @@
 class ApiUrlConfig {
   constructor() {
-    this.endPoint = "http://localhost:3000";
+    this.endPoint = "http://localhost:8000";
   }
 
   apiEndPoint() {

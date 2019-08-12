@@ -22,7 +22,7 @@
   display: block;
   padding: 10px 0;
   font-size: 14px;
-  color: $color-blue;
+  color: $color-primary;
   height: 42px;
   background: transparent;
   border: none;
@@ -31,15 +31,15 @@
 
   svg {
     height: 14px;
-    fill: $color-blue;
+    fill: $color-primary;
     transition: all 0.3s;
   }
 
   &:hover {
-    color: $color-blue-hover;
+    color: $color-primary-hover;
 
     svg {
-      fill: $color-blue-hover;
+      fill: $color-primary-hover;
     }
   }
 }
@@ -62,13 +62,13 @@
 
 .product-card__link {
   font-size: 12px;
-  color: $color-blue;
+  color: $color-primary;
   line-height: 16px;
   display: block;
   margin-left: 5px;
 
   &:hover {
-    color: $color-blue-hover;
+    color: $color-primary-hover;
     text-decoration: none;
   }
 }

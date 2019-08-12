@@ -36,8 +36,8 @@
   }
 
   .react-datepicker__header {
-    background-color: $color-blue;
-    border-color: $color-blue;
+    background-color: $color-primary;
+    border-color: $color-primary;
     border-radius: 0;
   }
 
@@ -63,16 +63,16 @@
   }
 
   .react-datepicker__day--keyboard-selected {
-    background-color: $color-blue;
+    background-color: $color-primary;
     transition: all 0.3s;
 
     &:hover {
-      background-color: $color-blue-hover;
+      background-color: $color-primary-hover;
     }
   }
 
   .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle {
-    border-bottom-color: $color-blue;
+    border-bottom-color: $color-primary;
     margin-top: -7px;
   }
 
@@ -89,6 +89,6 @@
   }
 
   .react-datepicker__day--selected, .react-datepicker__day--in-range, .react-datepicker__time-list-item--selected {
-    background-color: $color-blue-hover !important;
+    background-color: $color-primary-hover !important;
   }
 }

@@ -68,10 +68,10 @@
   }
 
   .active button {
-    background-color: $color-blue;
+    background-color: $color-primary;
 
     &:hover {
-      background-color: $color-blue-hover;
+      background-color: $color-primary-hover;
     }
   }
 }
