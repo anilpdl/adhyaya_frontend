@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, FormGroup, Input, Label } from 'reactstrap';
-
-import ROUTES from 'constants/Routes';
+import EyeIcon from 'mdi-react/EyeIcon';
+import KeyVariantIcon from 'mdi-react/KeyVariantIcon';
+import AccountOutlineIcon from 'mdi-react/AccountOutlineIcon';
 
 class LogInForm extends PureComponent {
   constructor() {
@@ -26,7 +27,7 @@ class LogInForm extends PureComponent {
           <Label className="form__form-group-label">Email</Label>
           <div className="form__form-group-field">
             <div className="form__form-group-icon">
-              {/* Account outline */}
+              <AccountOutlineIcon />
             </div>
             <Input 
               onChange={handleChange} 
@@ -41,7 +42,7 @@ class LogInForm extends PureComponent {
           <Label for="password" className="form__form-group-label">Password</Label>
           <div className="form__form-group-field">
             <div className="form__form-group-icon">
-              <i className="glyphicon" />
+              <KeyVariantIcon />
             </div>
             <Input
               name="password"
@@ -55,7 +56,7 @@ class LogInForm extends PureComponent {
               className={`form__form-group-button${showPassword ? ' active' : ''}`}
               onClick={e => this.showPassword(e)}
             >
-              {/* Eye */}
+              <EyeIcon />
             </button>
           </div>
           <div className="account__forgot-password">

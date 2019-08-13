@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 import LogInForm from 'components/Login/LogInForm';
 import UserApi from '../../apis/User';
+import Toaster from '../../components/Toaster/ToastManager';
 
 class LogIn extends Component {
   constructor() {
@@ -11,6 +12,8 @@ class LogIn extends Component {
       email: '',
       password: ''
     }
+
+    this.toastId = "loginForm";
   }
 
   handleChange = (e) => {
@@ -23,9 +26,14 @@ class LogIn extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const {email, password} = this.state;
+    const { email, password } = this.state;
 
-    UserApi.logIn({ email, password }).then(console.log).catch(console.error);
+    UserApi.logIn({ email, password }).then(({ data }) => {
+      const { user } = data;
+    }).catch((data) => {
+      console.log(JSON.parse(JSON.stringify(data)))
+      Toaster.getErrorToaster(this.toastId, data.message);
+    });
   };
 
   render() {
@@ -45,11 +53,11 @@ class LogIn extends Component {
               </h3>
               <h4 className="account__subhead subhead">Start your hasslefree abroad-venture</h4>
             </div>
-            <LogInForm 
+            <LogInForm
               email={email}
               password={password}
               handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit} 
+              handleSubmit={this.handleSubmit}
             />
           </div>
         </div>
