@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import LogInForm from 'components/Login/LogInForm';
 import UserApi from '../../apis/User';
 import Toaster from '../../components/Toaster/ToastManager';
+import * as LocalStorageManager from '../../constants/LocalStorageManager';
 
 class LogIn extends Component {
   constructor() {
@@ -29,10 +30,12 @@ class LogIn extends Component {
     const { email, password } = this.state;
 
     UserApi.logIn({ email, password }).then(({ data }) => {
-      const { user } = data;
+      const { user, token } = data;
+      LocalStorageManager.setToken(token);
+      LocalStorageManager.setUserObject(user);
     }).catch((data) => {
-      console.log(JSON.parse(JSON.stringify(data)))
-      Toaster.getErrorToaster(this.toastId, data.message);
+      const errorMsg = data.response? data.response.data.message: data.message;
+      Toaster.getErrorToaster(this.toastId, errorMsg);
     });
   };
 

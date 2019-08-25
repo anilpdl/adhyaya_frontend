@@ -9,14 +9,16 @@ import About from './containers/About';
 import Contact from './containers/Contact';
 import LogIn from './containers/LogIn';
 import Toaster from './components/Toaster';
+import Dashboard from './containers/Dashboard';
+import Layout from './containers/Layout';
+import MainWrapper from './components/MainWrapper/MainWrapper';
 
 const RouteWrapper = ({ component: Component, ...rest }) => {
     return (
         <Route {...rest}
             render={(props) => <Fragment>
-                <Header />
-                    <Component {...props} />
-                <Footer />
+                <Layout />
+                <Component {...props} />
             </Fragment>}
         />
     );
@@ -27,10 +29,12 @@ const App = () => {
         <div className="App">
             <Toaster />
             <BrowserRouter>
-                <RouteWrapper exact path={ROUTES.INDEX} component={Home} />
-                <RouteWrapper path={ROUTES.ABOUT_US} component={About} />
-                <RouteWrapper path={ROUTES.CONTACT_US} component={Contact} />
-                <RouteWrapper path={ROUTES.LOGIN} component={LogIn} />
+                <MainWrapper>
+                    <RouteWrapper exact path={ROUTES.INDEX} component={Dashboard} />
+                    <RouteWrapper path={ROUTES.ABOUT_US} component={About} />
+                    <RouteWrapper path={ROUTES.CONTACT_US} component={Contact} />
+                    <RouteWrapper path={ROUTES.LOGIN} component={LogIn} />
+                </MainWrapper>
             </BrowserRouter>
         </div>
     );

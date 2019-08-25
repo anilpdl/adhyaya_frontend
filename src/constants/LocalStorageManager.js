@@ -1,5 +1,6 @@
 
 const TOKEN = 'token';
+const USER = 'user';
 
 function saveToLocalStorage(name, value) {
   localStorage.setItem(name, value);
@@ -20,6 +21,14 @@ export function setObject(objectName, object) {
 export function getObject(objectName) {
   const object = localStorage.getItem(objectName);
   return JSON.parse(object);
+}
+
+export function setUserObject(object) {
+  setObject(USER, object)
+}
+
+export function getUserObject() {
+  return getObject(USER);
 }
 
 export function setToken(token) {
