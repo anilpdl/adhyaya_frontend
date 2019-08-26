@@ -5,16 +5,25 @@ import LogInForm from 'components/Login/LogInForm';
 import UserApi from '../../apis/User';
 import Toaster from '../../components/Toaster/ToastManager';
 import * as LocalStorageManager from '../../constants/LocalStorageManager';
+import ROUTES from '../../constants/Routes';
+import { isUserAuthenticated } from '../../utils/userHelpers';
 
 class LogIn extends Component {
   constructor() {
     super();
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      isAuthenticated: false,
     }
 
     this.toastId = "loginForm";
+  }
+
+  componentDidMount = () => {
+    const isAuthenticated = isUserAuthenticated();
+
+    this.setState({ isAuthenticated });
   }
 
   handleChange = (e) => {
@@ -33,6 +42,7 @@ class LogIn extends Component {
       const { user, token } = data;
       LocalStorageManager.setToken(token);
       LocalStorageManager.setUserObject(user);
+      this.setState({ isAuthenticated: true });
     }).catch((data) => {
       const errorMsg = data.response? data.response.data.message: data.message;
       Toaster.getErrorToaster(this.toastId, errorMsg);
@@ -40,7 +50,11 @@ class LogIn extends Component {
   };
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, isAuthenticated } = this.state;
+
+    if(isAuthenticated) {
+      return <Redirect to={ROUTES.DASHBOARD} />
+    }
 
     return (
       <div className="account">

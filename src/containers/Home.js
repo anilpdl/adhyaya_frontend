@@ -1,6 +1,7 @@
 import React from 'react';
-
+ 
 import logo from 'assets/img/logo.png';
+import UserApi from '../apis/User';
 
 class Home extends React.Component {
   constructor() {
@@ -9,6 +10,10 @@ class Home extends React.Component {
 
     }
   };
+
+  componentDidMount = () => {
+    UserApi.getDetails(4).then(console.log).catch(console.log)
+  }
 
   render() {
     return(

@@ -1,52 +1,54 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  Nav,
-  NavItem
-} from 'reactstrap';
 
+
+import TopbarWithNavigation from 'containers/Layout/topbar_with_navigation/TopbarWithNavigation';
+import SidebarMobile from 'containers/Layout/topbar_with_navigation/sidebar_mobile/SidebarMobile';
 import ROUTES from 'constants/Routes';
 import logo from 'assets/img/logo.png';
 
 export default class Header extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.toggle = this.toggle.bind(this);
+  constructor() {
+    super();
     this.state = {
-      isOpen: false
+      user: {},
+      sidebar: {
+        show: true,
+        collapse: true
+      },
     };
   }
-  toggle() {
-    this.setState(prevState => ({
-      isOpen: !prevState.isOpen
-    }));
+  
+  componentDidMount = () => {
+    
   }
-  render() {
-    const { isOpen } = this.state;
+  changeSidebarVisibility = () => {
+    const { sidebar } = this.state;
 
-    return (
+    this.setState(prevState => ({ 
+      sidebar: { ...sidebar, collapse: !prevState.sidebar.collapse }
+    }));
+  };
+
+  changeMobileSidebarVisibility = () => {
+    const { sidebar } = this.state;
+
+    this.setState(prevState => ({ 
+      sidebar: { ...sidebar, show: !prevState.sidebar.show }
+    }));
+  };
+  render() {
+    const { sidebar } = this.state;
+
+    return(
       <div>
-        <Navbar className="px-5" style={{backgroundColor: '#e98121'}} light expand="md">
-          <NavLink className="navbar-brand" to={ROUTES.INDEX}>
-            <img style={{borderRadius: 50}} src={logo} width={50} height={50} alt="logo" />
-          </NavLink>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink className="nav-link text-white" to={ROUTES.ABOUT_US}>About Us</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink className="nav-link text-white" to={ROUTES.CONTACT_US}>Contact Us</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
+        <TopbarWithNavigation
+            changeMobileSidebarVisibility={this.changeMobileSidebarVisibility}
+          />
+          <SidebarMobile
+            sidebar={sidebar}
+            changeMobileSidebarVisibility={this.changeMobileSidebarVisibility}
+          /> 
       </div>
-    );
+    )
   }
 }

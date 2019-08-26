@@ -6,6 +6,7 @@ import Topbar from './topbar/Topbar';
 import Sidebar from './sidebar/Sidebar';
 import UserApi from '../../apis/User';
 import * as LocalStorageManager from '../../constants/LocalStorageManager';
+import ROUTES from '../../constants/Routes';
 
 class Layout extends Component {
   constructor() {
@@ -20,7 +21,7 @@ class Layout extends Component {
   }
   
   componentDidMount = () => {
-    const {id} = LocalStorageManager.getUserObject();
+    const { id } = LocalStorageManager.getUserObject();
     UserApi.getDetails(id).then(({ data }) => {
       this.setState({ user: data.user });
     });
@@ -42,7 +43,8 @@ class Layout extends Component {
   };
 
   logOut = () => {
-    alert('log out');
+    LocalStorageManager.clear();
+    this.props.history.push(ROUTES.LOGIN);
   };
 
   render() {
