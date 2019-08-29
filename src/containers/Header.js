@@ -12,7 +12,7 @@ export default class Header extends React.Component {
     this.state = {
       user: {},
       sidebar: {
-        show: true,
+        show: false,
         collapse: true
       },
     };

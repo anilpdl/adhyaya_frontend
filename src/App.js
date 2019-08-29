@@ -13,6 +13,7 @@ import Dashboard from './containers/Dashboard';
 import Layout from './containers/Layout';
 import MainWrapper from './components/MainWrapper/MainWrapper';
 import { isUserAuthenticated } from './utils/userHelpers';
+import Services from './containers/Services';
 
 const RouteWrapper = ({ component: Component, ...rest }) => {
     return (
@@ -69,6 +70,7 @@ class App extends Component {
                         <PublicRoutes path={ROUTES.ABOUT_US} component={About} />
                         <PublicRoutes path={ROUTES.CONTACT_US} component={Contact} />
                         <PublicRoutes path={ROUTES.LOGIN} component={LogIn} />
+                        <PublicRoutes path={ROUTES.SERVICES} component={Services} />
                         <ProtectedRoutes exact path={ROUTES.DASHBOARD} component={Dashboard} />
                     </main>
                 </MainWrapper>

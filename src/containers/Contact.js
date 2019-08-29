@@ -11,10 +11,18 @@ class Contact extends React.Component {
   };
 
   render() {
-    return(
+    return (
       <div className="container">
         Contact page
-        <img src={logo} />
+        {/* <iframe
+          src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fpg%2FAdhyayaEducationalServices&width=450&layout=standard&action=like&size=small&show_faces=true&share=true&height=80&appId=519261352178133"
+          width="450"
+          height="80"
+          style={{ border: "none", overflow: "hidden" }}
+          scrolling="no"
+          frameborder="0"
+          allowTransparency="true"
+          allow="encrypted-media"></iframe> */}
       </div>
     )
   }

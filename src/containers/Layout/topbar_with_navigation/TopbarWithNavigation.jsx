@@ -23,10 +23,10 @@ export default class TopbarWithNavigation extends PureComponent {
         <div className="topbar__wrapper">
           <div className="topbar__left">
             <TopbarSidebarButton changeMobileSidebarVisibility={changeMobileSidebarVisibility} />
-            <Link className="topbar__logo" to={ROUTES.INDEX}>
+            <Link className="topbar__logo d-none d-lg-block " to={ROUTES.INDEX}>
               <img src={logo} alt="" className="logo topbar__button-icon" />           
             </Link>
-            <Link className="topbar__log my-auto text-white" to={ROUTES.INDEX}>
+            <Link className="topbar__log my-auto text-white d-none d-md-block" to={ROUTES.INDEX}>
               Adhyaya Educational Services
             </Link>  
           </div>

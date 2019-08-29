@@ -19,7 +19,6 @@ class Home extends React.Component {
     return(
       <div className="container">
         Home page
-        <img src={logo} />
       </div>
     )
   }

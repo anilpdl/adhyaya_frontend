@@ -11,10 +11,11 @@ class About extends React.Component {
   };
 
   render() {
-    return(
+    return (
       <div className="container">
-        About page
-        <img src={logo} />
+        <h3>Objectives</h3>
+        <h3>Mission and Vision</h3>
+        <h3>Educational Consulting</h3>
       </div>
     )
   }
