@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import ROUTES from 'constants/Routes';
+
 import { insertIdToUrl } from 'utils/routes';
 import SidebarLink from './SidebarLink';
 import SidebarCategory from './SidebarCategory';
+import ROUTES from 'constants/Routes';
 
 class SidebarContent extends Component {
   constructor() {
@@ -66,10 +67,9 @@ class SidebarContent extends Component {
         <ul className="sidebar__block">
           <SidebarLink
             icon="picture"
-            title="Creative Contents"
-            route={ROUTES.IMAGES}
+            title="Users"
+            route={ROUTES.ADD_USERS}
             onClick={this.hideSidebar}
-            newLink
           />
         </ul>
       </div>

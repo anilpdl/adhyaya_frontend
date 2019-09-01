@@ -5,6 +5,7 @@ import { insertIdToUrl } from "../../utils/routes";
 
 const URLS = {
   INDEX: `${apiUrlConfig.apiEndPoint()}/user/signin`,
+  INVITE: `${apiUrlConfig.apiEndPoint()}/user`,
   FETCH_URL: `${apiUrlConfig.apiEndPoint()}/user/:userId`,
 };
 

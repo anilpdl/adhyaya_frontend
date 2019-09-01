@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Route, BrowserRouter, Redirect } from 'react-router-dom';
+import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom';
 
 import Home from './containers/Home';
 import Header from './containers/Header';
@@ -14,6 +14,9 @@ import Layout from './containers/Layout';
 import MainWrapper from './components/MainWrapper/MainWrapper';
 import { isUserAuthenticated } from './utils/userHelpers';
 import Services from './containers/Services';
+import UserInvitation from './containers/UserInvitation';
+import InvalidToken from './components/UserInvitation/InvalidToken';
+import Users from './containers/Sidebar/Admin/User';
 
 const RouteWrapper = ({ component: Component, ...rest }) => {
     return (
@@ -57,7 +60,24 @@ const ProtectedRoutes = ({ component: Component, ...rest }) => {
             }}
         />
     )
+};
+
+const UserRoutes = () => {
+    return(
+        <Switch>
+            <ProtectedRoutes path={ROUTES.ADD_USERS} component={Users} />
+        </Switch>
+    )
 }
+
+const UserInvitationRoute = (() => {
+    return (
+        <Switch>
+            <Route exact path={ROUTES.INVALID_INVITATION} component={InvalidToken} />
+            <Route exact path={ROUTES.USER_INVITATIONS} component={UserInvitation} />
+        </Switch>
+    );
+});
 
 class App extends Component {
     render() {
@@ -70,8 +90,10 @@ class App extends Component {
                         <PublicRoutes path={ROUTES.ABOUT_US} component={About} />
                         <PublicRoutes path={ROUTES.CONTACT_US} component={Contact} />
                         <PublicRoutes path={ROUTES.LOGIN} component={LogIn} />
+                        <Route path={ROUTES.USER_INVITATIONS_INDEX} component={UserInvitationRoute} />
                         <PublicRoutes path={ROUTES.SERVICES} component={Services} />
                         <ProtectedRoutes exact path={ROUTES.DASHBOARD} component={Dashboard} />
+                        <Route path={ROUTES.USERS} component={UserRoutes} />
                     </main>
                 </MainWrapper>
             </BrowserRouter>
