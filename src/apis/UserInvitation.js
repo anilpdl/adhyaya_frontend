@@ -11,7 +11,6 @@ const URLS = {
 class UserInvitationApi {
 
   static create(data) {
-    console.log(data)
     return AuthenticatedRequestService.post(URLS.INDEX, data);
   }
 

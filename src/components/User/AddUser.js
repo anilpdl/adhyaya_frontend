@@ -9,8 +9,8 @@ class AddUser extends Component {
       <Form>
         <Col md={6}>
           Email:
-          <Input className="mb-3" name="email" type="email" value={email} onChange={handleChange} />
-          <div className="text-danger">{emailError}</div>
+          <Input name="email" type="email" value={email} onChange={handleChange} />
+          <div className="text-danger mb-3">{emailError}</div>
           <button className="btn btn-primary" onClick={handleSubmit}>Submit</button>
         </Col>
       </Form>

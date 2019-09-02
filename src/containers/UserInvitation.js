@@ -33,13 +33,10 @@ class UserInvitation extends Component {
   render() {
     const { expired } = this.state;
 
-    // if(expired)
-    //   return <Redirect to={ROUTES.INVALID_INVITATION} />
+    if(expired)
+      return <Redirect to={ROUTES.INVALID_INVITATION} />
     return(
       <div>
-        {/* <FormWrapper>
-          <SignUpForm />
-        </FormWrapper> */}
         <SignUp />
       </div>
     );

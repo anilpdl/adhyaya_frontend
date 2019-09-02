@@ -45,7 +45,7 @@ class LogIn extends Component {
       this.setState({ isAuthenticated: true });
     }).catch((data) => {
       const errorMsg = data.response? data.response.data.message: data.message;
-      Toaster.getErrorToaster(this.toastId, errorMsg);
+      Toaster.getErrorToaster(errorMsg, this.toastId);
     });
   };
 

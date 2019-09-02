@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import FormWrapper from 'components/Wrapper/FormWrapper';
 import SignUpForm from 'components/SignUp/SignUpForm';
+import UserApi from 'apis/User';
+import Toaster from 'components/Toaster/ToastManager';
 
 class SignUp extends Component {
   constructor() {
@@ -39,23 +42,50 @@ class SignUp extends Component {
     let hasError = false;
     const errors = { ...this.state.errors };
     fieldKeys.forEach(field => {
-      console.log()
-      errors[`${field}Error`] =  'This field is required';
-      hasError = !!fields[field] || hasError;
+      errors[`${field}Error`] =  fields[field]? undefined : 'This field is required';
+      if(field == 'rePassword' && fields[field]) {
+        const password = fields['password'];
+        const confirmPass = fields['rePassword'];
+        if(password != confirmPass) {
+          errors['rePasswordError'] = 'Passwords do not match';
+          hasError = true;
+        }
+      }
+      hasError = !fields[field] || hasError;
+      console.log(hasError, field)
     });
-    console.log(errors)
 
-    this.setState({ errors }, ()=>console.log('PP', errors));
+    this.setState({ errors });
     return hasError;
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
     const {
-      firstName, middleName,lastName, password, rePassword
+      firstName, middleName, gender, lastName, password, rePassword
     } = this.state;
 
-    this.validateForm({ firstName, middleName,lastName, password, rePassword })
+    const isFormValid = !this.validateForm({
+      firstName, lastName, password, rePassword
+    });
+    const invitation_id = this.props.match.params.invitationId;
+
+    if(isFormValid) {
+      const formData = {
+        first_name: firstName,
+        middle_name: middleName,
+        last_name: lastName,
+        gender,
+        password,
+        invitation_id
+      };
+      UserApi.create(formData).then(({ data })=> {
+        console.log('data', data);
+      }).catch(({response}) => {
+        const message = response? response.data.message: 'Error occured';
+        Toaster.getErrorToaster(message);
+      });
+    }
     
   }
 
@@ -63,7 +93,7 @@ class SignUp extends Component {
     const {
       firstName, middleName, lastName, gender, password, rePassword, togglePassword, errors
     } = this.state;
-    console.log(this.state)
+
     return (
       <FormWrapper>
         <SignUpForm
@@ -84,4 +114,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default withRouter(SignUp);
