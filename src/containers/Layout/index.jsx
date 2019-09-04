@@ -15,21 +15,23 @@ class Layout extends Component {
       user: {},
       sidebar: {
         show: true,
-        collapse: true
+        collapse: false
       },
     };
   }
-  
+
   componentDidMount = () => {
     const { id } = LocalStorageManager.getUserObject();
     UserApi.getDetails(id).then(({ data }) => {
       this.setState({ user: data.user });
     });
   }
+
+
   changeSidebarVisibility = () => {
     const { sidebar } = this.state;
 
-    this.setState(prevState => ({ 
+    this.setState(prevState => ({
       sidebar: { ...sidebar, collapse: !prevState.sidebar.collapse }
     }));
   };
@@ -37,7 +39,7 @@ class Layout extends Component {
   changeMobileSidebarVisibility = () => {
     const { sidebar } = this.state;
 
-    this.setState(prevState => ({ 
+    this.setState(prevState => ({
       sidebar: { ...sidebar, show: !prevState.sidebar.show }
     }));
   };

@@ -17,6 +17,8 @@ import Services from './containers/Services';
 import UserInvitation from './containers/UserInvitation';
 import InvalidToken from './components/UserInvitation/InvalidToken';
 import Users from './containers/Sidebar/Admin/User';
+import UsersList from './components/User/UsersList';
+import InvitationsList from './components/UserInvitation/InvitationsList';
 
 const RouteWrapper = ({ component: Component, ...rest }) => {
     return (
@@ -65,7 +67,8 @@ const ProtectedRoutes = ({ component: Component, ...rest }) => {
 const UserRoutes = () => {
     return(
         <Switch>
-            <ProtectedRoutes path={ROUTES.ADD_USERS} component={Users} />
+            <ProtectedRoutes exact path={ROUTES.ADD_USERS} component={Users} />
+            <ProtectedRoutes exact path={ROUTES.LIST_USERS} component={UsersList} />
         </Switch>
     )
 }
@@ -75,6 +78,7 @@ const UserInvitationRoute = (() => {
         <Switch>
             <Route exact path={ROUTES.INVALID_INVITATION} component={InvalidToken} />
             <Route exact path={ROUTES.USER_INVITATIONS} component={UserInvitation} />
+            <ProtectedRoutes path={ROUTES.USER_INVITATIONS_INDEX} component={InvitationsList} />
         </Switch>
     );
 });

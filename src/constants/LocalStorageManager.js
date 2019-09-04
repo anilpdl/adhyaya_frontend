@@ -1,6 +1,7 @@
 
 const TOKEN = 'token';
 const USER = 'user';
+const SIDEBAR_TOGGLE = 'SIDEBAR_TOGGLE';
 
 function saveToLocalStorage(name, value) {
   localStorage.setItem(name, value);
@@ -12,6 +13,14 @@ function getFromLocalStorage(name) {
 
 function deleteFromLocalStorage(name) {
   localStorage.removeItem(name);
+}
+
+export function getSidebarToggle() {
+  return getFromLocalStorage(SIDEBAR_TOGGLE);
+}
+
+export function setSidebarToggle(value) {
+  saveToLocalStorage(SIDEBAR_TOGGLE, value);
 }
 
 export function setObject(objectName, object) {

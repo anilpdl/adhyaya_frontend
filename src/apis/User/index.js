@@ -6,6 +6,7 @@ import { insertIdToUrl } from "utils/routes";
 const URLS = {
   INDEX: `${apiUrlConfig.apiEndPoint()}/user/signin`,
   CREATE: `${apiUrlConfig.apiEndPoint()}/user/signup`,
+  FETCH_ALL: `${apiUrlConfig.apiEndPoint()}/user/all`,
   FETCH_URL: `${apiUrlConfig.apiEndPoint()}/user/:userId`,
 };
 
@@ -13,6 +14,10 @@ class UserApi {
 
   static create(data) {
     return UnAuthenticatedRequestService.post(URLS.CREATE, data);
+  }
+
+  static getAll() {
+    return AuthenticatedRequestService.get(URLS.FETCH_ALL);
   }
   /**
    * get user detail
