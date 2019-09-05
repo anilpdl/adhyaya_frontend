@@ -19,6 +19,7 @@ import InvalidToken from './components/UserInvitation/InvalidToken';
 import Users from './containers/Sidebar/Admin/User';
 import UsersList from './components/User/UsersList';
 import InvitationsList from './components/UserInvitation/InvitationsList';
+import Files from './containers/Files';
 
 const RouteWrapper = ({ component: Component, ...rest }) => {
     return (
@@ -73,7 +74,15 @@ const UserRoutes = () => {
     )
 }
 
-const UserInvitationRoute = (() => {
+const FileRoutes = () => {
+    return (
+        <Switch>
+            <ProtectedRoutes exact path={ROUTES.FILES_INDEX} component={Files} />
+        </Switch>
+    )
+}
+
+const UserInvitationRoute = () => {
     return (
         <Switch>
             <Route exact path={ROUTES.INVALID_INVITATION} component={InvalidToken} />
@@ -81,7 +90,7 @@ const UserInvitationRoute = (() => {
             <ProtectedRoutes path={ROUTES.USER_INVITATIONS_INDEX} component={InvitationsList} />
         </Switch>
     );
-});
+};
 
 class App extends Component {
     render() {
@@ -97,6 +106,7 @@ class App extends Component {
                         <Route path={ROUTES.USER_INVITATIONS_INDEX} component={UserInvitationRoute} />
                         <PublicRoutes path={ROUTES.SERVICES} component={Services} />
                         <ProtectedRoutes exact path={ROUTES.DASHBOARD} component={Dashboard} />
+                        <Route path={ROUTES.FILES_INDEX} component={FileRoutes} />
                         <Route path={ROUTES.USERS} component={UserRoutes} />
                     </main>
                 </MainWrapper>

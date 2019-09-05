@@ -3,3 +3,16 @@ export const formatDate = (date) => {
 
   return newDate.toLocaleString();
 }
+
+export default function encodeImageFileAsURL(element) {
+  const { files } = element;
+  files.forEach((f) => {
+    const file = f;
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      file.path = reader.result;
+      console.log(file);
+    };
+    reader.readAsDataURL(file);
+  });
+}

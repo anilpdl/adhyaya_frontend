@@ -39,6 +39,14 @@ class SidebarContent extends Component {
             />
           </SidebarCategory>
         </ul>
+        <ul className="sidebar__block">
+          <SidebarCategory title="Files" icon="files">
+            <SidebarLink
+              title="Active"
+              route={ROUTES.FILES_INDEX}
+            />
+          </SidebarCategory>
+        </ul>
       </div>
     );
   }

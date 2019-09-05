@@ -7,7 +7,11 @@ const USER_INVITATIONS = {
   INDEX: '/user_invitation',
   EXPIRED: '/user_invitation/expired',
   INVITATION: '/user_invitation/token/:invitationId'
-}
+};
+
+const FILES = {
+  INDEX: '/files',
+};
 
 const ROUTES = {
   INDEX: '/',
@@ -22,6 +26,7 @@ const ROUTES = {
   USER_INVITATIONS_INDEX: USER_INVITATIONS.INDEX,
   USER_INVITATIONS: USER_INVITATIONS.INVITATION,
   INVALID_INVITATION: USER_INVITATIONS.EXPIRED,
+  FILES_INDEX: FILES.INDEX,
 }
 
 export default ROUTES;
