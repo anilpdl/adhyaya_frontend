@@ -12,7 +12,7 @@ const URLS = {
 class FileApi {
 
   static upload(data) {
-    return AuthenticatedRequestService.post(URLS.INDEX, data);
+    return AuthenticatedRequestService.postFile(URLS.INDEX, data);
   }
 
   static getAll() {

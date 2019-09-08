@@ -6,6 +6,10 @@ export const DEFAULT_HEADERS = {
   "Content-Type": "application/json"
 };
 
+export const FORM_DATA_HEADERS = {
+  "Content-Type": "multipart/form-data"
+};
+
 // Intercept the response to perform any additional tasks.
 axios.interceptors.response.use(
   response => response,
@@ -13,8 +17,8 @@ axios.interceptors.response.use(
 );
 
 class BaseRequest {
-  static _headers() {
-    return { headers: DEFAULT_HEADERS };
+  static _headers(headers = DEFAULT_HEADERS) {
+    return { headers };
   }
 
   static get(url) {
@@ -23,6 +27,10 @@ class BaseRequest {
 
   static post(url, data) {
     return axios.post(url, data, this._headers());
+  }
+
+  static postFile(url, data) {
+    return axios.post(url, data, this._headers(FORM_DATA_HEADERS));
   }
 
   static patch(url, data) {

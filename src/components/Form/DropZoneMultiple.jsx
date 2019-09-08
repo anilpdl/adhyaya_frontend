@@ -1,27 +1,13 @@
 /* eslint-disable react/no-array-index-key */
 import React, { PureComponent } from 'react';
 import Dropzone from 'react-dropzone';
-import PropTypes from 'prop-types';
 import { Alert } from 'reactstrap';
 
 import FilePreview from 'components/FileUpload/FilePreview';
 import FileUploadBlock from 'components/FileUpload/FileUploadBlock';
 import FileUploadInline from 'components/FileUpload/FileUploadInline';
 
-// import toBase64Encoder from 'utils/toBase64Encoder';
-
 class DropZoneMultipleField extends PureComponent {
-  static propTypes = {
-    onChange: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string,
-      })),
-    ]).isRequired,
-  };
-
   constructor() {
     super();
     this.state = {
@@ -32,10 +18,12 @@ class DropZoneMultipleField extends PureComponent {
 
   onDrop = (files) => {
     const { value, onChange } = this.props;
+    const prevFiles = [...value];
     files.forEach((file) => {
       file.preview = URL.createObjectURL(file);
-      onChange(value ? value.concat(file) : [file]);
     });
+    const newFiles = [...prevFiles, ...files];
+    onChange(newFiles);
   }
 
   stopParentEvent = (e) => {
@@ -62,14 +50,14 @@ class DropZoneMultipleField extends PureComponent {
     return (
       <div className="col-md-12">
         <Alert color="danger" isOpen={this.state.alert} toggle={this.dismissAlert}>
-          File is not acceptable or exceeds file size limit (&gt;5mb).
+          File is not acceptable or exceeds file size limit (&gt;12mb).
         </Alert>
         <Dropzone
-          accept="image/png, image/jpg, application/pdf"
+          accept="image/*, application/pdf"
           name={name}
           onDrop={this.onDrop}
-          multiple={false}
-          maxSize={5000000}
+          multiple
+          maxSize={12000000}
           onDropRejected={this.rejected}
         >
           {({ getRootProps, getInputProps, open }) => (
@@ -98,18 +86,5 @@ class DropZoneMultipleField extends PureComponent {
     );
   }
 }
-
-const renderDropZoneMultipleField = props => (
-  <DropZoneMultipleField
-    {...props.input}
-  />
-);
-
-renderDropZoneMultipleField.propTypes = {
-  input: PropTypes.shape({
-    onChange: PropTypes.func,
-    name: PropTypes.string,
-  }).isRequired,
-};
 
 export default DropZoneMultipleField;

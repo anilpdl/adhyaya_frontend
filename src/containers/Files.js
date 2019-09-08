@@ -1,28 +1,39 @@
 import React, { Component } from 'react';
 import { Form, Col, Card, CardBody } from 'reactstrap';
-import DropZoneMultipleField from '../components/Form/DropZoneMultiple';
-import FileApi from '../apis/File';
-
+import SpinIcon from 'mdi-react/CloudIcon'
+import Toaster from 'components/Toaster/ToastManager';
+import DropZoneMultipleField from 'components/Form/DropZoneMultiple';
+import FileApi from 'apis/File';
 
 class Files extends Component {
   constructor() {
     super();
     this.state = {
       value: [],
+      disabled: false
     }
   }
 
   handleUpload = (e) => {
     e.preventDefault();
     const { value } = this.state;
-    const files = new FormData();
+    if (value.length) {
+      this.setState({ disabled: true });
+      const files = new FormData();
 
-    value.forEach(file => {
-      files.append('file', file);
-    });
+      for (var x = 0; x < value.length; x++) {
+        files.append('file', value[x])
+      }
 
-    FileApi.upload(files).then(console.log)
-      .catch(console.log);
+      FileApi.upload(files).then(() => {
+        Toaster.getSuccessToaster('Files Uploaded Successfully')
+        this.setState({ value: [], disabled: false });
+      }).catch(({ response }) => {
+        const { data } = response;
+        Toaster.getErrorToaster(data.message);
+        this.setState({ disabled: false });
+      });
+    }
   }
 
   onChange = (value) => {
@@ -30,7 +41,7 @@ class Files extends Component {
   }
 
   render() {
-    const { value } = this.state;
+    const { value, disabled } = this.state;
 
     return (
       <Col>
@@ -46,10 +57,12 @@ class Files extends Component {
               Eg:
               SOP_Adhyaya.pdf
             </div>
-            <Form>
+            <Form onSubmit={this.handleUpload}>
               <Col sm={12}>
-                <DropZoneMultipleField value={value} onChange={this.onChange} />
-                <button className="btn btn-primary mt-3" onClick={this.handleUpload}>Upload</button>
+                <DropZoneMultipleField name="file" value={value} onChange={this.onChange} />
+                <button disabled={disabled} className="btn btn-primary mt-3">
+                  {disabled? 'Uploading': 'Upload'}
+                </button>
               </Col>
             </Form>
           </CardBody>
