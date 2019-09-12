@@ -1,9 +1,10 @@
-import React, { PureComponent } from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, FormGroup, Input, Label } from 'reactstrap';
 import EyeIcon from 'mdi-react/EyeIcon';
 import KeyVariantIcon from 'mdi-react/KeyVariantIcon';
 import AccountOutlineIcon from 'mdi-react/AccountOutlineIcon';
+import EmailIcon from 'mdi-react/MailRuIcon';
 
 const SignUpForm = (props) => {
   const {
@@ -17,13 +18,33 @@ const SignUpForm = (props) => {
     handleChange,
     showPassword,
     togglePassword,
-    errors
+    email,
+    errors,
+    editForm
   } = props;
 
   const { firstNameError, lastNameError, passwordError, rePasswordError } = errors;
+  const submitText = editForm ? 'Save Changes' : 'Sign Up';
 
   return (
     <Form className="form">
+      {editForm && (
+        <FormGroup className="form__form-group">
+          <Label className="form__form-group-label">Email</Label>
+          <div className="form__form-group-field">
+            <div className="form__form-group-icon">
+              <EmailIcon />
+            </div>
+            <Input
+              type="email"
+              placeholder="Email"
+              value={email}
+              name="email"
+              disabled
+            />
+          </div>
+        </FormGroup>
+      )}
       <FormGroup className="form__form-group">
         <Label className="form__form-group-label">First Name*</Label>
         <div className="form__form-group-field">
@@ -99,58 +120,60 @@ const SignUpForm = (props) => {
           </label>
         </div>
       </FormGroup>
+      {!editForm && (
+        <Fragment>
+          <FormGroup className="form__form-group">
+            <Label for="password" className="form__form-group-label">Password*</Label>
+            <div className="form__form-group-field">
+              <div className="form__form-group-icon">
+                <KeyVariantIcon />
+              </div>
+              <Input
+                name="password"
+                value={password}
+                onChange={handleChange}
+                type={togglePassword ? 'text' : 'password'}
+                placeholder="Password"
+              />
+              <button
+                type="button"
+                className={`form__form-group-button${togglePassword ? ' active' : ''}`}
+                onClick={showPassword}
+              >
+                <EyeIcon />
+              </button>
+            </div>
+            <div className="text-danger">{passwordError}</div>
 
-      <FormGroup className="form__form-group">
-        <Label for="password" className="form__form-group-label">Password*</Label>
-        <div className="form__form-group-field">
-          <div className="form__form-group-icon">
-            <KeyVariantIcon />
-          </div>
-          <Input
-            name="password"
-            value={password}
-            onChange={handleChange}
-            type={togglePassword ? 'text' : 'password'}
-            placeholder="Password"
-          />
-          <button
-            type="button"
-            className={`form__form-group-button${togglePassword ? ' active' : ''}`}
-            onClick={showPassword}
-          >
-            <EyeIcon />
-          </button>
-        </div>
-        <div className="text-danger">{passwordError}</div>
-
-      </FormGroup>
-      <FormGroup className="form__form-group">
-        <Label for="password" className="form__form-group-label">ReType Password *</Label>
-        <div className="form__form-group-field">
-          <div className="form__form-group-icon">
-            <KeyVariantIcon />
-          </div>
-          <Input
-            name="rePassword"
-            value={rePassword}
-            onChange={handleChange}
-            type={togglePassword ? 'text' : 'password'}
-            placeholder="Confirm Password"
-          />
-          <button
-            type="button"
-            className={`form__form-group-button${togglePassword ? ' active' : ''}`}
-            onClick={showPassword}
-          >
-            <EyeIcon />
-          </button>
-        </div>
-        <div className="text-danger">{rePasswordError}</div>
-      </FormGroup>
-
+          </FormGroup>
+          <FormGroup className="form__form-group">
+            <Label for="password" className="form__form-group-label">ReType Password *</Label>
+            <div className="form__form-group-field">
+              <div className="form__form-group-icon">
+                <KeyVariantIcon />
+              </div>
+              <Input
+                name="rePassword"
+                value={rePassword}
+                onChange={handleChange}
+                type={togglePassword ? 'text' : 'password'}
+                placeholder="Confirm Password"
+              />
+              <button
+                type="button"
+                className={`form__form-group-button${togglePassword ? ' active' : ''}`}
+                onClick={showPassword}
+              >
+                <EyeIcon />
+              </button>
+            </div>
+            <div className="text-danger">{rePasswordError}</div>
+          </FormGroup>
+        </Fragment>
+      )}
       <button className="btn btn-primary account__btn account__btn--small" onClick={handleSubmit}>
-        Sign Up
-        </button>
+        {submitText}
+      </button>
     </Form>
   );
 }

@@ -33,7 +33,8 @@ class UsersList extends Component {
       return content;
     }
 
-    return 'No data to display';
+    return <tr>
+      <td className="text-center" colSpan={4}>No data to display</td></tr>;
   }
 
   render() {
@@ -53,6 +54,10 @@ class UsersList extends Component {
         </tr>
       );
     })
+    if (isLoading) {
+      return (<div className="panel__refresh"><LoadingIcon /></div>)
+    }
+
     return (
       <Col md={12} lg={12}>
         <Card>
@@ -62,18 +67,20 @@ class UsersList extends Component {
               <h5 className="subhead">Signed up <span className="red-text">students list</span></h5>
             </div>
             <Table responsive className="table--bordered">
-              <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Created Date</th>
-                <th>Last Login</th>
-              </tr>
-              {
-                isLoading ? (
-                  <div className="panel__refresh"><LoadingIcon /></div>
-                ) : this.renderTableContent(usersList)
-              }
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Created Date</th>
+                  <th>Last Login</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  this.renderTableContent(usersList)
+                }
+              </tbody>
             </Table>
           </CardBody>
         </Card>

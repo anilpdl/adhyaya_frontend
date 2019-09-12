@@ -14,7 +14,7 @@ class Layout extends Component {
     this.state = {
       user: {},
       sidebar: {
-        show: true,
+        show: false,
         collapse: false
       },
     };
@@ -56,7 +56,7 @@ class Layout extends Component {
     });
 
     const { sidebar, user } = this.state;
-    const { first_name: name, picture} = user;
+    const { first_name: name, picture } = user;
 
     return (
       <div className={layoutClass}>

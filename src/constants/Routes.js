@@ -21,6 +21,7 @@ const ROUTES = {
   CONTACT_US: '/contact',
   LOGIN: '/login',
   SERVICES: '/services',
+  PROFILE: '/profile',
   USERS: USER.INDEX,
   ADD_USERS: USER.ADD_USER,
   LIST_USERS: USER.INDEX,

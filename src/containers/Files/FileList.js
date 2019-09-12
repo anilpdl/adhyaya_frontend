@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Form, Col, Card, CardBody } from 'reactstrap';
+import { Table, Col, Card, CardBody } from 'reactstrap';
 
 import Toaster from 'components/Toaster/ToastManager';
 import FileApi from 'apis/File';
-import FilePreview from '../../components/Files/FileThumbnail';
+import FileRow from 'components/Files/FileRow';
 import { getUserObject } from '../../constants/LocalStorageManager';
 
 class FileList extends Component {
@@ -19,17 +19,18 @@ class FileList extends Component {
   }
 
   fetchAllFiles = async () => {
-    try{
+    try {
       const { data } = await FileApi.getAll();
       this.setState({ files: data, isLoading: false });
-    } catch(err) {
+    } catch (err) {
+      Toaster.getErrorToaster("Error fetchinf files");
       this.setState({ isLoading: false });
     }
   }
 
   render() {
     const { files } = this.state;
-    const fileList = files.map(file => <FilePreview file={file} />);
+    const fileList = files.map(file => <FileRow key={file.id} file={file} />);
     return (
       <Col>
         <Card>
@@ -38,13 +39,21 @@ class FileList extends Component {
               <h5 className="bold-text">Files</h5>
               <h5 className="subhead">Files List</h5>
             </div>
-            Note:
-            <div className="text-info">
-              Naming files with file type and student name is preferred.
-              Eg:
-              SOP_Adhyaya.pdf
-            </div>
-            {fileList}
+            <Table responsive className="table--bordered">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Preview</th>
+                  <th>Type</th>
+                  <th>Uploaded By</th>
+                  <th>Upload Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {fileList}
+              </tbody>
+            </Table>
           </CardBody>
         </Card>
       </Col>

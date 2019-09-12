@@ -21,6 +21,7 @@ import UsersList from './components/User/UsersList';
 import InvitationsList from './components/UserInvitation/InvitationsList';
 import FileUpload from './containers/Files/FileUpload';
 import FileList from './containers/Files/FileList';
+import UserProfile from './containers/UserProfile';
 
 const RouteWrapper = ({ component: Component, ...rest }) => {
     return (
@@ -67,7 +68,7 @@ const ProtectedRoutes = ({ component: Component, ...rest }) => {
 };
 
 const UserRoutes = () => {
-    return(
+    return (
         <Switch>
             <ProtectedRoutes exact path={ROUTES.ADD_USERS} component={Users} />
             <ProtectedRoutes exact path={ROUTES.LIST_USERS} component={UsersList} />
@@ -108,6 +109,7 @@ class App extends Component {
                         <Route path={ROUTES.USER_INVITATIONS_INDEX} component={UserInvitationRoute} />
                         <PublicRoutes path={ROUTES.SERVICES} component={Services} />
                         <ProtectedRoutes exact path={ROUTES.DASHBOARD} component={Dashboard} />
+                        <ProtectedRoutes excat path={ROUTES.PROFILE} component={UserProfile} />
                         <Route path={ROUTES.FILES_INDEX} component={FileRoutes} />
                         <Route path={ROUTES.USERS} component={UserRoutes} />
                     </main>

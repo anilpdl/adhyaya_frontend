@@ -8,6 +8,7 @@ const URLS = {
   CREATE: `${apiUrlConfig.apiEndPoint()}/user/signup`,
   FETCH_ALL: `${apiUrlConfig.apiEndPoint()}/user/all`,
   FETCH_URL: `${apiUrlConfig.apiEndPoint()}/user/:userId`,
+  CHANGE_PASSWORD: `${apiUrlConfig.apiEndPoint()}/user/:userId/password`,
 };
 
 class UserApi {
@@ -18,6 +19,17 @@ class UserApi {
 
   static getAll() {
     return AuthenticatedRequestService.get(URLS.FETCH_ALL);
+  }
+
+  static changePassword(data, userId) {
+    console.log(data)
+    const URL = insertIdToUrl(URLS.CHANGE_PASSWORD, userId);
+    return AuthenticatedRequestService.post(URL, data);
+  }
+
+  static update(data, userId) {
+    const URL = insertIdToUrl(URLS.FETCH_URL, userId);
+    return AuthenticatedRequestService.post(URL, data);
   }
   /**
    * get user detail

@@ -64,7 +64,7 @@ class InvitationsList extends Component {
 
       this.fetchUserInvitations();
       Toaster.getSuccessToaster(`Invitation link resent to ${email}`);
-    }).catch(()=> Toaster.getErrorToaster('Error re-sending invitation link'));
+    }).catch(() => Toaster.getErrorToaster('Error re-sending invitation link'));
   }
 
   renderTableContent = (content) => {
@@ -72,7 +72,8 @@ class InvitationsList extends Component {
       return content;
     }
 
-    return 'No data to display';
+    return <tr>
+      <td className="text-center" colSpan={4}>No data to display</td></tr>;
   }
 
   render() {
@@ -89,8 +90,8 @@ class InvitationsList extends Component {
           </td>
           <td>{formatDate(updated_at)}</td>
           <td>
-            <MailIcon color="blue" onClick={()=> this.resendInvitation(id)} />
-            <TrashIcon color="red" onClick={()=> this.deleteInvitation(id)} />
+            <MailIcon color="blue" onClick={() => this.resendInvitation(id)} />
+            <TrashIcon color="red" onClick={() => this.deleteInvitation(id)} />
           </td>
         </tr>
       );
@@ -111,17 +112,21 @@ class InvitationsList extends Component {
               <h5 className="subhead">Invitations pending <span className="red-text">confirmations</span></h5>
             </div>
             <Table responsive className="table--bordered">
-              <tr>
-                <th></th>
-                <th>Email</th>
-                <th>Invitation Date</th>
-                <th>Actions</th>
-              </tr>
-              {
-                isLoading ? (
-                  <div className="panel__refresh"><LoadingIcon /></div>
-                ) : this.renderTableContent(userInvitationsList)
-              }
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Email</th>
+                  <th>Invitation Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  isLoading ? (
+                    <div className="panel__refresh"><LoadingIcon /></div>
+                  ) : this.renderTableContent(userInvitationsList)
+                }
+              </tbody>
             </Table>
           </CardBody>
         </Card>

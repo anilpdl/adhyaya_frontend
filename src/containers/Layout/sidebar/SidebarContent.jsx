@@ -40,7 +40,7 @@ class SidebarContent extends Component {
           </SidebarCategory>
         </ul>
         <ul className="sidebar__block">
-          <SidebarCategory title="Files" icon="files">
+          <SidebarCategory title="Files" icon="inbox">
             <SidebarLink
               title="List"
               route={ROUTES.FILES_INDEX}

@@ -7,7 +7,7 @@ import ROUTES from 'constants/Routes';
 import TopbarMenuLink from './TopbarMenuLink';
 
 // const Ava = `${process.env.PUBLIC_URL}/img/ava.png`;
-const Aron = 'assets/img/logo.png';
+const Aron = require('assets/img/logo.png');
 
 export default class TopbarProfile extends PureComponent {
   constructor() {
@@ -33,8 +33,7 @@ export default class TopbarProfile extends PureComponent {
         {this.state.collapse && <button type="button" className="topbar__back" onClick={this.toggle} />}
         <Collapse isOpen={this.state.collapse} className="topbar__menu-wrap">
           <div className="topbar__menu">
-            <TopbarMenuLink title="Home" icon="home" path={ROUTES.DASHBOARD} />
-            <TopbarMenuLink title="Page two" icon="inbox" path={ROUTES.PAGE_TWO} />
+            <TopbarMenuLink title="Profile" icon="cog" path={ROUTES.PROFILE} />
             <div className="topbar__menu-divider" />
             <span className="topbar__link" onClick={logOut} role="presentation">
               <span className="topbar__link-icon lnr lnr-exit" />
