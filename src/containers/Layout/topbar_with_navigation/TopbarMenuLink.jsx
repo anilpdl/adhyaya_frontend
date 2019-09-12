@@ -9,10 +9,4 @@ const TopbarMenuLinks = ({ title, icon, path }) => (
   </Link>
 );
 
-TopbarMenuLinks.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
-};
-
 export default TopbarMenuLinks;

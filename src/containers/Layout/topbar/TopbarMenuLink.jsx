@@ -15,8 +15,10 @@ export default class TopbarMenuLinks extends PureComponent {
   }
 }
 
+TopbarMenuLinks.defaultProps = {
+  path: ''
+};
+
 TopbarMenuLinks.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
+  path: PropTypes.string
 };

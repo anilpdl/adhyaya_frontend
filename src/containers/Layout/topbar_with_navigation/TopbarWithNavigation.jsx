@@ -11,10 +11,7 @@ import logo from 'assets/img/logo.png';
 
 
 export default class TopbarWithNavigation extends PureComponent {
-  static propTypes = {
-    changeMobileSidebarVisibility: PropTypes.func.isRequired,
-  };
-
+ 
   render() {
     const { changeMobileSidebarVisibility } = this.props;
 
@@ -33,7 +30,7 @@ export default class TopbarWithNavigation extends PureComponent {
           <TopbarNav />
           <div className="topbar__right">
           <Link className="topbar__nav-link bg-white" to={ROUTES.LOGIN}>
-            <div className="icon icon--right" color="primary" outline>
+            <div className="icon icon--right" color="primary" outline="true" >
               <p><SendIcon /> Login</p>
               </div>
           </Link>

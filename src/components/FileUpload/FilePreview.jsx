@@ -19,12 +19,4 @@ const FilePreview = ({ file, removeFile, index }) => {
   </div>
 );}
 
-FilePreview.propTypes = {
-  file: PropTypes.shape({
-    preview: PropTypes.string,
-  }).isRequired,
-  removeFile: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired,
-};
-
 export default FilePreview;

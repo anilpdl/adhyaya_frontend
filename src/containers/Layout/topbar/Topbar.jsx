@@ -35,10 +35,3 @@ class Topbar extends PureComponent {
 
 export default Topbar;
 
-Topbar.propTypes = {
-  changeMobileSidebarVisibility: PropTypes.func.isRequired,
-  changeSidebarVisibility: PropTypes.func.isRequired,
-  logOut: PropTypes.func.isRequired,
-  name: PropTypes.isRequired,
-  picture: PropTypes.isRequired,
-};

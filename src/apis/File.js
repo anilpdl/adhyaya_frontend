@@ -5,18 +5,18 @@ import { insertIdToUrl } from "utils/routes";
 
 const URLS = {
   INDEX: `${apiUrlConfig.apiEndPoint()}/file`,
-  FETCH_ALL: `${apiUrlConfig.apiEndPoint()}/user_invitations/all`,
-  FETCH_URL: `${apiUrlConfig.apiEndPoint()}/user_invitations/:userInvitationId`,
+  UPLOAD: `${apiUrlConfig.apiEndPoint()}/user/:userId/file`,
 };
 
 class FileApi {
 
-  static upload(data) {
-    return AuthenticatedRequestService.postFile(URLS.INDEX, data);
+  static upload(data, userId) {
+    const INDEX_URL = insertIdToUrl(URLS.UPLOAD, userId);
+    return AuthenticatedRequestService.postFile(INDEX_URL, data);
   }
 
   static getAll() {
-    return AuthenticatedRequestService.get(URLS.FETCH_ALL);
+    return AuthenticatedRequestService.get(URLS.INDEX);
   }
 
   static getDetails(invitationId) {

@@ -11,9 +11,4 @@ const FileUploadBlock = ({ getRootProps, getInputProps }) => (
   </div>
 );
 
-FileUploadBlock.propTypes = {
-  getRootProps: PropTypes.func.isRequired,
-  getInputProps: PropTypes.func.isRequired,
-};
-
 export default FileUploadBlock;

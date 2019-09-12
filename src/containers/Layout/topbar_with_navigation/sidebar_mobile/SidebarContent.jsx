@@ -5,12 +5,6 @@ import SidebarCategory from './SidebarCategory';
 import ROUTES from '../../../../constants/Routes';
 
 class SidebarContent extends Component {
-  static propTypes = {
-    changeToDark: PropTypes.func.isRequired,
-    changeToLight: PropTypes.func.isRequired,
-    onClick: PropTypes.func.isRequired,
-  };
-
   hideSidebar = () => {
     this.props.onClick();
   };

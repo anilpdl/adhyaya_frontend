@@ -19,7 +19,8 @@ import InvalidToken from './components/UserInvitation/InvalidToken';
 import Users from './containers/Sidebar/Admin/User';
 import UsersList from './components/User/UsersList';
 import InvitationsList from './components/UserInvitation/InvitationsList';
-import Files from './containers/Files';
+import FileUpload from './containers/Files/FileUpload';
+import FileList from './containers/Files/FileList';
 
 const RouteWrapper = ({ component: Component, ...rest }) => {
     return (
@@ -77,7 +78,8 @@ const UserRoutes = () => {
 const FileRoutes = () => {
     return (
         <Switch>
-            <ProtectedRoutes exact path={ROUTES.FILES_INDEX} component={Files} />
+            <ProtectedRoutes exact path={ROUTES.FILES_UPLOAD} component={FileUpload} />
+            <ProtectedRoutes exact path={ROUTES.FILES_INDEX} component={FileList} />
         </Switch>
     )
 }

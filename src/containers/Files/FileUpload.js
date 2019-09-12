@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { Form, Col, Card, CardBody } from 'reactstrap';
-import SpinIcon from 'mdi-react/CloudIcon'
 import Toaster from 'components/Toaster/ToastManager';
 import DropZoneMultipleField from 'components/Form/DropZoneMultiple';
 import FileApi from 'apis/File';
+import { getUserObject } from '../../constants/LocalStorageManager';
 
 class Files extends Component {
   constructor() {
     super();
     this.state = {
       value: [],
+      numPages: 0,
       disabled: false
     }
   }
@@ -17,6 +18,7 @@ class Files extends Component {
   handleUpload = (e) => {
     e.preventDefault();
     const { value } = this.state;
+    const { id } = getUserObject();
     if (value.length) {
       this.setState({ disabled: true });
       const files = new FormData();
@@ -25,7 +27,7 @@ class Files extends Component {
         files.append('file', value[x])
       }
 
-      FileApi.upload(files).then(() => {
+      FileApi.upload(files, id).then(() => {
         Toaster.getSuccessToaster('Files Uploaded Successfully')
         this.setState({ value: [], disabled: false });
       }).catch(({ response }) => {
@@ -40,8 +42,16 @@ class Files extends Component {
     this.setState({ value });
   }
 
+  onDocumentLoadSuccess = ({ numPages }) => {
+    this.setState({ numPages });
+  }
+
+  onLoadError = (e) => {
+    console.log(e)
+  }
+
   render() {
-    const { value, disabled } = this.state;
+    const { value, disabled, numPages } = this.state;
 
     return (
       <Col>
@@ -61,7 +71,7 @@ class Files extends Component {
               <Col sm={12}>
                 <DropZoneMultipleField name="file" value={value} onChange={this.onChange} />
                 <button disabled={disabled} className="btn btn-primary mt-3">
-                  {disabled? 'Uploading': 'Upload'}
+                  {disabled ? 'Uploading' : 'Upload'}
                 </button>
               </Col>
             </Form>

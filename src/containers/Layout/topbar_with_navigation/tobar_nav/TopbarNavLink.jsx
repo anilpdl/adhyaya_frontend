@@ -17,10 +17,8 @@ const TopbarNavLink = ({
 
 
 TopbarNavLink.propTypes = {
-  title: PropTypes.string.isRequired,
   icon: PropTypes.string,
-  newLink: PropTypes.bool,
-  route: PropTypes.string.isRequired,
+  newLink: PropTypes.bool
 };
 
 TopbarNavLink.defaultProps = {

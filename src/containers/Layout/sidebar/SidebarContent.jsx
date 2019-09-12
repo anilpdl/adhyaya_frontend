@@ -42,8 +42,12 @@ class SidebarContent extends Component {
         <ul className="sidebar__block">
           <SidebarCategory title="Files" icon="files">
             <SidebarLink
-              title="Active"
+              title="List"
               route={ROUTES.FILES_INDEX}
+            />
+            <SidebarLink
+              title="Upload"
+              route={ROUTES.FILES_UPLOAD}
             />
           </SidebarCategory>
         </ul>
@@ -53,7 +57,3 @@ class SidebarContent extends Component {
 }
 
 export default SidebarContent;
-
-SidebarContent.propTypes = {
-  onClick: PropTypes.func.isRequired,
-};

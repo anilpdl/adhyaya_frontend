@@ -22,7 +22,6 @@ const SidebarLink = ({
 );
 
 SidebarLink.propTypes = {
-  title: PropTypes.string.isRequired,
   icon: PropTypes.string,
   newLink: PropTypes.bool,
   route: PropTypes.string,

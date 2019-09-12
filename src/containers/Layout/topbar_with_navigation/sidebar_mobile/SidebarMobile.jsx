@@ -26,9 +26,4 @@ const Sidebar = ({
   );
 };
 
-Sidebar.propTypes = {
-  changeMobileSidebarVisibility: PropTypes.func.isRequired,
-};
-
-
 export default Sidebar;

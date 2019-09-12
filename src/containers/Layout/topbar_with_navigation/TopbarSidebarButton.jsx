@@ -6,10 +6,6 @@ import logo from 'assets/img/logo.png';
 const icon = require('assets/img/burger.svg');
 
 class TopbarSidebarButton extends PureComponent {
-  static propTypes = {
-    changeMobileSidebarVisibility: PropTypes.func.isRequired,
-  };
-
   render() {
     const { changeMobileSidebarVisibility } = this.props;
 

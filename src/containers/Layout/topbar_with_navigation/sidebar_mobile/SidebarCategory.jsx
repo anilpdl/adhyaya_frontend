@@ -5,10 +5,8 @@ import classNames from 'classnames';
 
 export default class SidebarCategory extends Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
     icon: PropTypes.string,
-    isNew: PropTypes.bool,
-    children: PropTypes.arrayOf(PropTypes.element).isRequired,
+    isNew: PropTypes.bool
   };
 
   static defaultProps = {

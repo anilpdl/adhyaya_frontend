@@ -50,8 +50,6 @@ export default class SidebarCategory extends Component {
 }
 
 SidebarCategory.propTypes = {
-  title: PropTypes.string.isRequired,
   icon: PropTypes.string,
-  isNew: PropTypes.bool,
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  isNew: PropTypes.bool
 };

@@ -16,10 +16,4 @@ const TopbarNavCategory = ({ title, icon, children }) => (
   </div>
 );
 
-TopbarNavCategory.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
-};
-
 export default TopbarNavCategory;

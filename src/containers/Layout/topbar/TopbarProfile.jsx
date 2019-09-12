@@ -46,9 +46,3 @@ export default class TopbarProfile extends PureComponent {
     );
   }
 }
-
-TopbarProfile.propTypes = {
-  name: PropTypes.isRequired,
-  picture: PropTypes.isRequired,
-  logOut: PropTypes.func.isRequired,
-};

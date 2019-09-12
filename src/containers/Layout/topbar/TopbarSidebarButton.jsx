@@ -21,8 +21,3 @@ class TopbarSidebarButton extends PureComponent {
 }
 
 export default TopbarSidebarButton;
-
-TopbarSidebarButton.propTypes = {
-  changeMobileSidebarVisibility: PropTypes.func.isRequired,
-  changeSidebarVisibility: PropTypes.func.isRequired,
-};

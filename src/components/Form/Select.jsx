@@ -3,28 +3,6 @@ import Select from 'react-select';
 import PropTypes from 'prop-types';
 
 class SelectField extends PureComponent {
-  static propTypes = {
-    onChange: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
-    options: PropTypes.arrayOf(PropTypes.shape({
-      value: PropTypes.string,
-      label: PropTypes.string,
-    })),
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.shape({
-        value: PropTypes.string,
-        label: PropTypes.string,
-      }),
-    ]).isRequired,
-  };
-
-  static defaultProps = {
-    placeholder: '',
-    options: [],
-  };
-
   handleChange = (selectedOption) => {
     this.props.onChange(selectedOption);
   };

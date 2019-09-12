@@ -25,10 +25,4 @@ const FileUploadInline = ({ getRootProps, getInputProps, open }) => (
   </div>
 );
 
-FileUploadInline.propTypes = {
-  open: PropTypes.func.isRequired,
-  getRootProps: PropTypes.func.isRequired,
-  getInputProps: PropTypes.func.isRequired,
-};
-
 export default FileUploadInline;
