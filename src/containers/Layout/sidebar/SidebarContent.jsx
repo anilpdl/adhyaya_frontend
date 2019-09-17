@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-
 import { insertIdToUrl } from 'utils/routes';
 import SidebarLink from './SidebarLink';
 import SidebarCategory from './SidebarCategory';
 import ROUTES from 'constants/Routes';
+
+const logo = require('assets/img/logo.png');
 
 class SidebarContent extends Component {
   constructor() {
@@ -23,6 +24,10 @@ class SidebarContent extends Component {
 
     return (
       <div className="sidebar__content">
+        <SidebarLink
+          title="Dashboard"
+          route={ROUTES.DASHBOARD}
+        />
         <ul className="sidebar__block">
           <SidebarCategory title="Students" icon="users">
             <SidebarLink

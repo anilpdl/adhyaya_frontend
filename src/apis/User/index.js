@@ -9,6 +9,7 @@ const URLS = {
   FETCH_ALL: `${apiUrlConfig.apiEndPoint()}/user/all`,
   FETCH_URL: `${apiUrlConfig.apiEndPoint()}/user/:userId`,
   CHANGE_PASSWORD: `${apiUrlConfig.apiEndPoint()}/user/:userId/password`,
+  USER_AVATAR: `${apiUrlConfig.apiEndPoint()}/user/:userId/avatar`
 };
 
 class UserApi {
@@ -43,6 +44,11 @@ class UserApi {
    */
   static logIn(data) {
     return UnAuthenticatedRequestService.post(URLS.INDEX, data);
+  }
+
+  static uploadAvatar(data, userId) {
+    const INDEX_URL = insertIdToUrl(URLS.USER_AVATAR, userId);
+    return AuthenticatedRequestService.postFile(INDEX_URL, data)
   }
 }
 

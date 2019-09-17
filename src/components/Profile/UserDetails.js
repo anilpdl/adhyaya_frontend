@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Label, Input, Row, Col, ButtonGroup, Button } from 'reactstrap';
 
-import logo from '../../assets/img/logo.png';
+import UserAvatar from './UserAvatar';
 
 class UserDetails extends Component {
   constructor() {
@@ -12,15 +12,16 @@ class UserDetails extends Component {
   }
 
   render() {
-    const { profile, toggleChangePassword, toggleEditInfo } = this.props;
-    const { email, first_name, middle_name, last_name, gender } = profile;
+    const { profile, toggleChangePassword, toggleEditInfo, uploadAvatar } = this.props;
+    const { email, first_name, middle_name, last_name, user_avatar } = profile;
 
     return (
       <Row className="mb-5">
         <Col md={4}>
-          <div>
-            <img src={logo} width={200} className="rounded-circle border border-primary" />
-          </div>
+          <UserAvatar
+            userAvatar={user_avatar}
+            uploadAvatar={uploadAvatar}
+          />
         </Col>
         <Col className="card__title" md={8}>
           <Row>

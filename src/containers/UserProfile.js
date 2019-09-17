@@ -12,7 +12,9 @@ class UserProfile extends Component {
   constructor() {
     super();
     this.state = {
-      profile: {},
+      profile: {
+        user_avatar: {}
+      },
       editInfo: false
     }
   }
@@ -40,6 +42,21 @@ class UserProfile extends Component {
     })
   }
 
+  uploadAvatar = (avatar) => {
+    const { id } = LocalStorageManager.getUserObject();
+    const file = new FormData();
+
+    file.append('avatar', avatar[0]);
+    UserApi.uploadAvatar(file, id).then(({ data }) => {
+      const { profile } = this.state;
+      const updatedProfile = { ...profile, user_avatar: data };
+      this.setState({ profile: updatedProfile });
+      Toaster.getSuccessToaster('Avatar Updated Successfully');
+    }).catch(() => {
+      Toaster.getErrorToaster('Error occured while updating avatar');
+    });
+  }
+
   renderChildren = () => {
     const { editInfo, changePassword, profile } = this.state;
     if (editInfo) {
@@ -58,6 +75,7 @@ class UserProfile extends Component {
 
     return (
       <UserDetails
+        uploadAvatar={this.uploadAvatar}
         toggleChangePassword={this.toggleChangePassword}
         toggleEditInfo={this.toggleEditInfo}
         profile={profile}

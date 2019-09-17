@@ -20,7 +20,7 @@ class Topbar extends PureComponent {
               changeMobileSidebarVisibility={changeMobileSidebarVisibility}
               changeSidebarVisibility={changeSidebarVisibility}
             />
-            <Link className="topbar__log my-auto text-white" to={ROUTES.DASHBOARD}>
+            <Link className="topbar__log d-none d-md-block my-auto text-white ml-2" to={ROUTES.DASHBOARD}>
               Adhyaya Educational Services
             </Link>
           </div>

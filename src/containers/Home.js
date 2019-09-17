@@ -11,10 +11,6 @@ class Home extends React.Component {
     }
   };
 
-  componentDidMount = () => {
-    UserApi.getDetails(4).then(console.log).catch(console.log)
-  }
-
   render() {
     return(
       <div className="container">

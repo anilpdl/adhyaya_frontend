@@ -1,0 +1,35 @@
+@import "../abstracts/variables";
+
+.avatar-container {
+  position: relative;
+
+  .avatar-upload {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    display: block;
+    color: $white;
+    width: 194px;
+    text-align: center;
+    background: $primary;
+    top: 50%;
+    margin: auto;
+    cursor: pointer;
+    transition: opacity 0.5s linear;
+    
+  }
+
+  .avatar-image {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    border: 3px solid $primary;
+    transition: opacity 0.5s linear;
+
+    &:hover .avatar-upload {
+      visibility: visible;
+      opacity: 1;
+      transition: visibility 0s, opacity 0.5s linear;
+    }
+  }
+}

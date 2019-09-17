@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import SidebarContent from './SidebarContent';
 
 const Sidebar = ({
-  changeToDark, changeToLight, changeMobileSidebarVisibility, sidebar,
+  changeMobileSidebarVisibility, sidebar,
 }) => {
   const sidebarClass = classNames({
     sidebar: true,
@@ -20,16 +20,12 @@ const Sidebar = ({
           <SidebarContent
             onClick={() => {}}
             userType={() => {}}
-            changeToDark={changeToDark}
-            changeToLight={changeToLight}
           />
         </div>
         <div className="sidebar__wrapper sidebar__wrapper--mobile">
           <SidebarContent
             onClick={changeMobileSidebarVisibility}
             userType={() => {}}
-            changeToDark={changeToDark}
-            changeToLight={changeToLight}
           />
         </div>
       </Scrollbar>

@@ -20,8 +20,8 @@ class FileThumbnail extends Component {
 
   render() {
     const { file } = this.props;
-    const { name, url } = file;
-    if (name === 'pdf') {
+    const { format, url } = file;
+    if (format === 'pdf') {
       return (
         <Document
           className="pdf-container"

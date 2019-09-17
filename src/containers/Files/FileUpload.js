@@ -24,6 +24,7 @@ class Files extends Component {
       const files = new FormData();
 
       for (var x = 0; x < value.length; x++) {
+        console.log(value[x])
         files.append('file', value[x])
       }
 

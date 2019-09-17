@@ -44,6 +44,7 @@ class FileList extends Component {
                 <tr>
                   <th></th>
                   <th>Preview</th>
+                  <th>Name</th>
                   <th>Type</th>
                   <th>Uploaded By</th>
                   <th>Upload Date</th>
