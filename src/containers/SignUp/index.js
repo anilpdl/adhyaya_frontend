@@ -5,6 +5,7 @@ import FormWrapper from 'components/Wrapper/FormWrapper';
 import SignUpForm from 'components/SignUp/SignUpForm';
 import UserApi from 'apis/User';
 import Toaster from 'components/Toaster/ToastManager';
+import ROUTES from 'constants/Routes';
 
 class SignUp extends Component {
   constructor() {
@@ -80,7 +81,9 @@ class SignUp extends Component {
         invitation_id
       };
       UserApi.create(formData).then(({ data })=> {
-        console.log('data', data);
+        localStorage.clear();
+        Toaster.getSuccessToaster("Signed up successfully! Please login to continue");
+        this.props.history.push(ROUTES.LOGIN);
       }).catch(({response}) => {
         const message = response? response.data.message: 'Error occured';
         Toaster.getErrorToaster(message);
