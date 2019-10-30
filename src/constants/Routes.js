@@ -11,8 +11,14 @@ const USER_INVITATIONS = {
 
 const FILES = {
   INDEX: '/files',
-  UPLAOD: '/files/upload'
+  UPLOAD: '/files/upload'
 };
+
+const PASSWORD = {
+  INDEX: '/password',
+  RESET: '/password/reset/:resetToken',
+  FORGOT: '/password/forgot'
+}
 
 const ROUTES = {
   INDEX: '/',
@@ -29,7 +35,10 @@ const ROUTES = {
   USER_INVITATIONS: USER_INVITATIONS.INVITATION,
   INVALID_INVITATION: USER_INVITATIONS.EXPIRED,
   FILES_INDEX: FILES.INDEX,
-  FILES_UPLOAD: FILES.UPLAOD
+  FILES_UPLOAD: FILES.UPLOAD,
+  PASSWORD_INDEX: PASSWORD.INDEX,
+  FORGOT_PASSWORD: PASSWORD.FORGOT,
+  RESET_PASSWORD: PASSWORD.RESET
 }
 
 export default ROUTES;

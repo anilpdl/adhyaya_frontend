@@ -4,6 +4,7 @@ import { Form, FormGroup, Input, Label } from 'reactstrap';
 import EyeIcon from 'mdi-react/EyeIcon';
 import KeyVariantIcon from 'mdi-react/KeyVariantIcon';
 import AccountOutlineIcon from 'mdi-react/AccountOutlineIcon';
+import ROUTES from '../../constants/Routes';
 
 class LogInForm extends PureComponent {
   constructor() {
@@ -60,7 +61,7 @@ class LogInForm extends PureComponent {
             </button>
           </div>
           <div className="account__forgot-password">
-            <a href="/">Forgot a password?</a>
+            <Link to={ROUTES.FORGOT_PASSWORD}>Forgot a password?</Link>
           </div>
         </FormGroup>
         <button className="btn btn-primary account__btn account__btn--small" onClick={handleSubmit}>

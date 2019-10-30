@@ -9,7 +9,9 @@ const URLS = {
   FETCH_ALL: `${apiUrlConfig.apiEndPoint()}/user/all`,
   FETCH_URL: `${apiUrlConfig.apiEndPoint()}/user/:userId`,
   CHANGE_PASSWORD: `${apiUrlConfig.apiEndPoint()}/user/:userId/password`,
-  USER_AVATAR: `${apiUrlConfig.apiEndPoint()}/user/:userId/avatar`
+  USER_AVATAR: `${apiUrlConfig.apiEndPoint()}/user/:userId/avatar`,
+  FORGET_PASSWORD: `${apiUrlConfig.apiEndPoint()}/user/forgot_password`,
+  RESET_PASSWORD: `${apiUrlConfig.apiEndPoint()}/user/reset_password`
 };
 
 class UserApi {
@@ -23,7 +25,6 @@ class UserApi {
   }
 
   static changePassword(data, userId) {
-    console.log(data)
     const URL = insertIdToUrl(URLS.CHANGE_PASSWORD, userId);
     return AuthenticatedRequestService.post(URL, data);
   }
@@ -49,6 +50,14 @@ class UserApi {
   static uploadAvatar(data, userId) {
     const INDEX_URL = insertIdToUrl(URLS.USER_AVATAR, userId);
     return AuthenticatedRequestService.postFile(INDEX_URL, data)
+  }
+
+  static forgotPassword(email) {
+    return UnAuthenticatedRequestService.post(URLS.FORGET_PASSWORD, email);
+  }
+
+  static resetPassword(token, password) {
+    return UnAuthenticatedRequestService.post(URLS.RESET_PASSWORD, { password, token });
   }
 }
 

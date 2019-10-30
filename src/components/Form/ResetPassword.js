@@ -34,7 +34,6 @@ export const PasswordField = ({ label, name, value, handleChange, togglePassword
 const PasswordForm = (props) => {
   const {
     rePassword,
-    oldPassword,
     newPassword,
     handleSubmit,
     handleChange,
@@ -43,20 +42,10 @@ const PasswordForm = (props) => {
     errors,
   } = props;
 
-  const { oldPasswordError, newPasswordError, rePasswordError } = errors;
+  const { newPasswordError, rePasswordError } = errors;
 
   return (
     <Form className="form">
-      <PasswordField
-        label="Old Password"
-        name="oldPassword"
-        togglePassword={togglePassword}
-        placeholder="Old Password"
-        handleChange={handleChange}
-        error={oldPasswordError}
-        value={oldPassword}
-        showPassword={showPassword}
-      />
       <PasswordField
         label="New Password"
         name="newPassword"

@@ -22,6 +22,8 @@ import InvitationsList from './components/UserInvitation/InvitationsList';
 import FileUpload from './containers/Files/FileUpload';
 import FileList from './containers/Files/FileList';
 import UserProfile from './containers/UserProfile';
+import ForgotPassword from './containers/ForgotPassword';
+import ResetPasswordContainer from './containers/ResetPassword';
 
 const RouteWrapper = ({ component: Component, ...rest }) => {
     return (
@@ -95,6 +97,15 @@ const UserInvitationRoute = () => {
     );
 };
 
+const PasswordRoutes = () => {
+    return (
+        <Switch>
+            <Route exact path={ROUTES.FORGOT_PASSWORD} component={ForgotPassword} />
+            <Route exact path={ROUTES.RESET_PASSWORD} component={ResetPasswordContainer} />
+        </Switch>
+    );
+}
+
 class App extends Component {
     render() {
         return (
@@ -112,6 +123,7 @@ class App extends Component {
                         <ProtectedRoutes excat path={ROUTES.PROFILE} component={UserProfile} />
                         <Route path={ROUTES.FILES_INDEX} component={FileRoutes} />
                         <Route path={ROUTES.USERS} component={UserRoutes} />
+                        <Route path={ROUTES.PASSWORD_INDEX} component={PasswordRoutes} />
                     </main>
                 </MainWrapper>
             </BrowserRouter>
