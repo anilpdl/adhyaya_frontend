@@ -90,8 +90,12 @@ class InvitationsList extends Component {
           </td>
           <td>{formatDate(updated_at)}</td>
           <td>
-            <MailIcon color="blue" onClick={() => this.resendInvitation(id)} />
-            <TrashIcon color="red" onClick={() => this.deleteInvitation(id)} />
+            <button className="btn btn-secondary" onClick={() => this.resendInvitation(id)}>
+              <MailIcon />
+            </button>
+            <button className="btn btn-danger" onClick={() => this.deleteInvitation(id)}>
+              <TrashIcon />
+            </button>
           </td>
         </tr>
       );

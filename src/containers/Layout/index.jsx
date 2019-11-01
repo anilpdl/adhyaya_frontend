@@ -56,7 +56,7 @@ class Layout extends Component {
     });
 
     const { sidebar, user } = this.state;
-    const { first_name: name, picture } = user;
+    const { first_name: name, user_avatar } = user;
 
     return (
       <div className={layoutClass}>
@@ -64,7 +64,7 @@ class Layout extends Component {
           changeMobileSidebarVisibility={this.changeMobileSidebarVisibility}
           changeSidebarVisibility={this.changeSidebarVisibility}
           name={name}
-          picture={picture}
+          picture={user_avatar}
           logOut={this.logOut}
         />
         <Sidebar

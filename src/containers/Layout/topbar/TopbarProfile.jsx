@@ -6,8 +6,7 @@ import { Collapse } from 'reactstrap';
 import ROUTES from 'constants/Routes';
 import TopbarMenuLink from './TopbarMenuLink';
 
-// const Ava = `${process.env.PUBLIC_URL}/img/ava.png`;
-const Aron = require('assets/img/logo.png');
+const logo = require('assets/img/logo.png');
 
 export default class TopbarProfile extends PureComponent {
   constructor() {
@@ -23,10 +22,12 @@ export default class TopbarProfile extends PureComponent {
 
   render() {
     const { logOut, name, picture } = this.props;
+    const imgSrc = picture? picture.url: logo;
+
     return (
       <div className="topbar__profile">
         <button type="button" className="topbar__avatar" onClick={this.toggle}>
-          <img className="topbar__avatar-img" src={picture || Aron} alt="avatar" />
+          <img className="topbar__avatar-img" src={imgSrc} alt="avatar" />
           <p className="topbar__avatar-name">{name || 'User'}</p>
           <DownIcon className="topbar__icon" />
         </button>

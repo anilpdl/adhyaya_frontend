@@ -20,7 +20,7 @@ const DeleteModal = ({
       </div>
       <ButtonToolbar className="modal__footer">
         <Button onClick={toggleModal}>Cancel</Button>{' '}
-        <Button outline onClick={() => confirmDelete(deleteId)}>Ok</Button>
+        <Button className="btn-danger text-light" outline onClick={() => confirmDelete(deleteId)}>Ok</Button>
       </ButtonToolbar>
     </Modal>
   );

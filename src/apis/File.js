@@ -5,6 +5,7 @@ import { insertIdToUrl } from "utils/routes";
 
 const URLS = {
   INDEX: `${apiUrlConfig.apiEndPoint()}/file`,
+  FETCH: `${apiUrlConfig.apiEndPoint()}/file/:fileId`,
   UPLOAD: `${apiUrlConfig.apiEndPoint()}/user/:userId/file`,
 };
 
@@ -19,9 +20,14 @@ class FileApi {
     return AuthenticatedRequestService.get(URLS.INDEX);
   }
 
-  static getDetails(invitationId) {
-    const INDEX_URL = insertIdToUrl(URLS.FETCH_URL, invitationId);
-    return UnAuthenticatedRequestService.get(INDEX_URL);
+  static getDetails(fileId) {
+    const INDEX_URL = insertIdToUrl(URLS.FETCH, fileId);
+    return AuthenticatedRequestService.get(INDEX_URL);
+  }
+
+  static approveFile(fileId, approverId) {
+    const INDEX_URL = insertIdToUrl(URLS.FETCH, fileId);
+    return AuthenticatedRequestService.post(INDEX_URL, { approverId });
   }
 
   static resendInvitation(id) {

@@ -12,13 +12,13 @@ class FileRow extends Component {
     FileSaver.saveAs(url, name);
   }
   render() {
-    const { file } = this.props;
-    const { user, url, name, format, created_at } = file;
+    const { file, toggleApproveModal } = this.props;
+    const { id, user, url, name, format, created_at, is_approved, approved_by } = file;
     const { first_name, last_name } = user;
     const fileType = format == 'pdf' ? 'PDF' : 'Image';
 
     return (
-      <tr>
+      <tr className="file-list-row">
         <td></td>
         <td><FileThumbnail file={file} /></td>
         <td>{name}</td>
@@ -26,9 +26,10 @@ class FileRow extends Component {
         <td>{first_name} {last_name}</td>
         <td>{formatDate(created_at)}</td>
         <td className="d-flex justify-content-around">
-          <a href={url} target='_blank' download={name}><EyeIcon /></a>
-          <div className="" onClick={() => this.downloadFile(url, name)}><DownloadIcon color="red" /></div>
+          <a href={url} target='_blank'><EyeIcon /></a>
+          <div className="cursor-pointer" onClick={() => this.downloadFile(url, name)}><DownloadIcon color="red" /></div>
         </td>
+        <td>{is_approved? `Approved by ${approved_by.first_name}`: <button onClick={()=>toggleApproveModal(id)} className="btn btn-primary">Approve</button>}</td>
       </tr>
     );
   }
