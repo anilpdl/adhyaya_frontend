@@ -5,6 +5,7 @@ import { insertIdToUrl } from 'utils/routes';
 import SidebarLink from './SidebarLink';
 import SidebarCategory from './SidebarCategory';
 import ROUTES from 'constants/Routes';
+import { getUserObject } from '../../../constants/LocalStorageManager';
 
 const logo = require('assets/img/logo.png');
 
@@ -22,13 +23,15 @@ class SidebarContent extends Component {
 
   render() {
 
+    const { role } = getUserObject();
+
     return (
       <div className="sidebar__content">
-        <SidebarLink
-          title="Dashboard"
-          route={ROUTES.DASHBOARD}
-        />
         <ul className="sidebar__block">
+          <SidebarLink
+            title="Dashboard"
+            route={ROUTES.DASHBOARD}
+          />
           <SidebarCategory title="Students" icon="users">
             <SidebarLink
               title="Active"

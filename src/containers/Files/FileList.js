@@ -6,6 +6,7 @@ import FileApi from 'apis/File';
 import FileRow from 'components/Files/FileRow';
 import { getUserObject } from '../../constants/LocalStorageManager';
 import FileModal from '../../components/Files/FileModal';
+import DeleteModal from '../../components/Files/FileDeleteModal';
 
 class FileList extends Component {
   constructor() {
@@ -14,7 +15,9 @@ class FileList extends Component {
       files: [],
       file: {},
       isFileModalVisible: false,
-      fileId: undefined
+      fileId: undefined,
+      isDeleteModalVisible: false,
+      deleteFile: {}
     }
   }
 
@@ -75,9 +78,36 @@ class FileList extends Component {
     }), this.fetchFile);
   }
 
+  toggleDeleteModal = (file) => {
+    let deleteFile;
+    if (typeof file == "object" && file.id) deleteFile = file;
+    this.setState(prevState => ({
+      deleteFile,
+      isDeleteModalVisible: !prevState.isDeleteModalVisible
+    }));
+  }
+
+  confirmDelete = async () => {
+    const { deleteFile } = this.state;
+    if (!deleteFile.id)
+      return;
+    try {
+      const status = await FileApi.deleteFile(deleteFile.id);
+      Toaster.getSuccessToaster("File deleted successfully");
+      this.fetchAllFiles();
+    } catch (e) {
+      console.log(e)
+      Toaster.getErrorToaster("Error deleting file");
+    }
+
+    this.toggleDeleteModal();
+  }
+
   render() {
-    const { files, isFileModalVisible, file, isFetchingFile } = this.state;
-    const fileList = files.map(file => <FileRow toggleApproveModal={this.toggleApproveModal} key={file.id} file={file} />);
+    const { files, isFileModalVisible, file, isFetchingFile, isDeleteModalVisible, deleteFile } = this.state;
+    const fileList = files.map(file => <FileRow
+      toggleApproveModal={this.toggleApproveModal} key={file.id} file={file} toggleDeleteModal={this.toggleDeleteModal}
+    />);
     return (
       <Col>
         <Card>
@@ -87,6 +117,12 @@ class FileList extends Component {
             isFetchingFile={isFetchingFile}
             approveFile={this.approveFile}
             file={file}
+          />
+          <DeleteModal
+            isVisible={isDeleteModalVisible}
+            toggleModal={this.toggleDeleteModal}
+            confirmDelete={this.confirmDelete}
+            file={deleteFile}
           />
           <CardBody>
             <div className="card__title">

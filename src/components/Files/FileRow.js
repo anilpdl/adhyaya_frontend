@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EyeIcon from 'mdi-react/EyeIcon';
 import DownloadIcon from 'mdi-react/DownloadIcon';
+import TrashIcon from 'mdi-react/TrashOutlineIcon'
 import FileSaver from 'file-saver';
 
 import FileThumbnail from './FileThumbnail';
@@ -12,7 +13,7 @@ class FileRow extends Component {
     FileSaver.saveAs(url, name);
   }
   render() {
-    const { file, toggleApproveModal } = this.props;
+    const { file, toggleApproveModal, toggleDeleteModal } = this.props;
     const { id, user, url, name, format, created_at, is_approved, approved_by } = file;
     const { first_name, last_name } = user;
     const fileType = format == 'pdf' ? 'PDF' : 'Image';
@@ -28,8 +29,9 @@ class FileRow extends Component {
         <td className="d-flex justify-content-around">
           <a href={url} target='_blank'><EyeIcon /></a>
           <div className="cursor-pointer" onClick={() => this.downloadFile(url, name)}><DownloadIcon color="red" /></div>
+          <div className="cursor-pointer" onClick={()=>toggleDeleteModal(file)}><TrashIcon color="red" /></div>
         </td>
-        <td>{is_approved? `Approved by ${approved_by.first_name}`: <button onClick={()=>toggleApproveModal(id)} className="btn btn-primary">Approve</button>}</td>
+        <td>{is_approved ? `Approved by ${approved_by.first_name}` : <button onClick={() => toggleApproveModal(id)} className="btn btn-primary">Approve</button>}</td>
       </tr>
     );
   }

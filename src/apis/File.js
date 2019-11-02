@@ -30,13 +30,8 @@ class FileApi {
     return AuthenticatedRequestService.post(INDEX_URL, { approverId });
   }
 
-  static resendInvitation(id) {
-    const INDEX_URL = insertIdToUrl(URLS.FETCH_URL, id);
-    return AuthenticatedRequestService.post(INDEX_URL);
-  }
-
-  static deleteInvitation(id) {
-    const INDEX_URL = insertIdToUrl(URLS.FETCH_URL, id);
+  static deleteFile(id) {
+    const INDEX_URL = insertIdToUrl(URLS.FETCH, id);
     return AuthenticatedRequestService.delete(INDEX_URL);
   }
 }
