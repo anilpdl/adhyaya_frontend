@@ -53,7 +53,6 @@ class SignUp extends Component {
         }
       }
       hasError = !fields[field] || hasError;
-      console.log(hasError, field)
     });
 
     this.setState({ errors });

@@ -7,6 +7,9 @@ import Toaster from 'components/Toaster/ToastManager';
 import Profile from 'components/Profile/Profile';
 import UserDetails from 'components/Profile/UserDetails';
 import ChangePassword from 'components/Profile/ChangePassword';
+import PersonalInfo from '../components/Profile/PersonalInfo';
+import EducationInfo from '../components/Profile/EducationInfo';
+import ContactInfo from '../components/Profile/ContactInfo';
 
 class UserProfile extends Component {
   constructor() {
@@ -94,6 +97,9 @@ class UserProfile extends Component {
             {this.renderChildren()}
           </CardBody>
         </Card>
+        <PersonalInfo />
+        <EducationInfo />
+        <ContactInfo />
       </Col>
     )
   }

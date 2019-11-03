@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { Form, FormGroup, Input, Label } from 'reactstrap';
+import { Form, FormGroup, Input, Label, Button } from 'reactstrap';
 import EyeIcon from 'mdi-react/EyeIcon';
 import KeyVariantIcon from 'mdi-react/KeyVariantIcon';
 import AccountOutlineIcon from 'mdi-react/AccountOutlineIcon';
@@ -20,7 +20,9 @@ const SignUpForm = (props) => {
     togglePassword,
     email,
     errors,
-    editForm
+    editForm,
+    cancelBtn,
+    cancelAction
   } = props;
 
   const { firstNameError, lastNameError, passwordError, rePasswordError } = errors;
@@ -174,6 +176,9 @@ const SignUpForm = (props) => {
       <button className="btn btn-primary account__btn account__btn--small" onClick={handleSubmit}>
         {submitText}
       </button>
+      {cancelBtn && (
+        <button className="btn btn-secondary account__btn account__btn--small" onClick={cancelAction} >Cancel</button>
+      )}
     </Form>
   );
 }

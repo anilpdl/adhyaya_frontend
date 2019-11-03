@@ -103,9 +103,10 @@ class Profile extends Component {
           handleSubmit={this.handleSubmit}
           email={email}
           errors={errors}
+          cancelAction={toggleEditInfo}
+          cancelBtn
           editForm
         />
-        <Button className="account__btn account__btn--small" onClick={toggleEditInfo} >Cancel</Button>
       </React.Fragment>
     );
   }

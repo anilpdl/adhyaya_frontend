@@ -41,6 +41,8 @@ const PasswordForm = (props) => {
     showPassword,
     togglePassword,
     errors,
+    cancelBtn,
+    cancelAction
   } = props;
 
   const { oldPasswordError, newPasswordError, rePasswordError } = errors;
@@ -80,6 +82,9 @@ const PasswordForm = (props) => {
       <button className="btn btn-primary account__btn account__btn--small" onClick={handleSubmit}>
         Change Password
       </button>
+      {cancelBtn && (
+        <button className="btn account__btn account__btn--small" onClick={cancelAction} >Cancel</button>
+      )}
     </Form>
   );
 }

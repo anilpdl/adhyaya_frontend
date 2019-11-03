@@ -16,7 +16,7 @@ class UserAvatar extends Component {
     const { userAvatar, uploadAvatar } = this.props;
     const { url } = userAvatar || { url: undefined };
     const imageUrl = url ? url : logo;
-    console.log(imageUrl)
+    
     return (
       <div className="avatar-container">
         <div className="avatar-image" style={{

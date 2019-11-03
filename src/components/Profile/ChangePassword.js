@@ -55,7 +55,6 @@ class ChangePassword extends Component {
         }
       }
       hasError = !fields[field] || hasError;
-      console.log(hasError, field)
     });
 
     this.setState({ errors });
@@ -79,7 +78,6 @@ class ChangePassword extends Component {
         new_password: newPassword
       };
       UserApi.changePassword(formData, id).then(({ data }) => {
-        console.log('data', data);
         Toaster.getSuccessToaster("Password changed Successfully");
         this.props.toggleChangePassword();
       }).catch(({ response }) => {

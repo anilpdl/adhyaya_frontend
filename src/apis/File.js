@@ -1,11 +1,11 @@
 import apiUrlConfig from "configs/apiUrlConfig";
-import UnAuthenticatedRequestService from "services/requests/UnAuthenticated";
 import AuthenticatedRequestService from "services/requests/Authenticated";
 import { insertIdToUrl } from "utils/routes";
 
 const URLS = {
   INDEX: `${apiUrlConfig.apiEndPoint()}/file`,
   FETCH: `${apiUrlConfig.apiEndPoint()}/file/:fileId`,
+  FETCH_USER: `${apiUrlConfig.apiEndPoint()}/user/:userId/files`,
   UPLOAD: `${apiUrlConfig.apiEndPoint()}/user/:userId/file`,
 };
 
@@ -18,6 +18,11 @@ class FileApi {
 
   static getAll() {
     return AuthenticatedRequestService.get(URLS.INDEX);
+  }
+
+  static fetchUserFiles(userId) {
+    const INDEX_URL = insertIdToUrl(URLS.FETCH_USER, userId);
+    return AuthenticatedRequestService.get(INDEX_URL);
   }
 
   static getDetails(fileId) {

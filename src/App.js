@@ -24,6 +24,9 @@ import FileList from './containers/Files/FileList';
 import UserProfile from './containers/UserProfile';
 import ForgotPassword from './containers/ForgotPassword';
 import ResetPasswordContainer from './containers/ResetPassword';
+import { getUserObject } from './constants/LocalStorageManager';
+import { USERS } from './constants';
+import UserFileList from './containers/Files/UserFileList';
 
 const RouteWrapper = ({ component: Component, ...rest }) => {
     return (
@@ -79,10 +82,13 @@ const UserRoutes = () => {
 }
 
 const FileRoutes = () => {
+    const { role } = getUserObject();
+    const isAdmin = role == USERS.ADMIN;
+
     return (
         <Switch>
             <ProtectedRoutes exact path={ROUTES.FILES_UPLOAD} component={FileUpload} />
-            <ProtectedRoutes exact path={ROUTES.FILES_INDEX} component={FileList} />
+            <ProtectedRoutes exact path={ROUTES.FILES_INDEX} component={isAdmin? FileList: UserFileList} />
         </Switch>
     )
 }

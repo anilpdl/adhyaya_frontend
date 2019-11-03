@@ -11,7 +11,6 @@ export default function encodeImageFileAsURL(element) {
     const reader = new FileReader();
     reader.onloadend = () => {
       file.path = reader.result;
-      console.log(file);
     };
     reader.readAsDataURL(file);
   });
