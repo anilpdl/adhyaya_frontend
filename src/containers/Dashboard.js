@@ -50,12 +50,6 @@ class Dashboard extends Component {
             count={file_count}
             path={ROUTES.FILES_INDEX}
           />
-          <DashboardWidget
-            title="Files"
-            subtitle="Total number of files uploaded"
-            count={file_count}
-            path={ROUTES.FILES_INDEX}
-          />
         </Row>
       </Container>
     )
