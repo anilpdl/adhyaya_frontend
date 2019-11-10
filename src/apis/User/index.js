@@ -11,7 +11,8 @@ const URLS = {
   CHANGE_PASSWORD: `${apiUrlConfig.apiEndPoint()}/user/:userId/password`,
   USER_AVATAR: `${apiUrlConfig.apiEndPoint()}/user/:userId/avatar`,
   FORGET_PASSWORD: `${apiUrlConfig.apiEndPoint()}/user/forgot_password`,
-  RESET_PASSWORD: `${apiUrlConfig.apiEndPoint()}/user/reset_password`
+  RESET_PASSWORD: `${apiUrlConfig.apiEndPoint()}/user/reset_password`,
+  SUBSCRIBE: `${apiUrlConfig.apiEndPoint()}/user/subscribe`
 };
 
 class UserApi {
@@ -58,6 +59,10 @@ class UserApi {
 
   static resetPassword(token, password) {
     return UnAuthenticatedRequestService.post(URLS.RESET_PASSWORD, { password, token });
+  }
+
+  static subscribe(email) {
+    return UnAuthenticatedRequestService.post(URLS.SUBSCRIBE, { email });
   }
 }
 

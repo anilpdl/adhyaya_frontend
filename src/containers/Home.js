@@ -16,11 +16,24 @@ class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-
+      email: ''
     }
   };
 
+  handleChange = (e) => {
+    const { value } = e.target;
+    this.setState({ email: value })
+  }
+
+  handleSubmit = (e) => {
+    const { email } = this.state;
+    e.preventDefault();
+    UserApi.subscribe(email).then().catch();
+  }
+
   render() {
+    const { email } = this.state;
+
     return (
       <div className="home">
         <header class="home-area overlay" id="home_page">
@@ -210,10 +223,11 @@ class Home extends React.Component {
             <div class="row">
               <div class="col-xs-12 col-sm-8 col-sm-offset-2">
                 <div class="subscribe-form text-center">
-                  <h3 class="blue-color">Send us feedback</h3>
+                  <h3 class="blue-color">Want to know more?</h3>
+                  <p>Send us your email and we will reach you.</p>
                   <div class="space-20"></div>
-                  <form id="mc-form">
-                    <input type="email" class="control" placeholder="Enter your email" required="required" id="mc-email" />
+                  <form id="mc-form" onSubmit={this.handleSubmit}>
+                    <input onChange={this.handleChange} type="email" name="email" value={email} class="control" placeholder="Enter your email" required="required" id="mc-email" />
                     <button class="bttn-white active" type="submit"><span class="lnr lnr-location"></span> Send</button>
                     <label class="mt10" for="mc-email"></label>
                   </form>
