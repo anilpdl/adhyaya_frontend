@@ -61,7 +61,7 @@ class Home extends React.Component {
             </div>
           </div>
         </header>
-        <section class="section-padding" id="about_page">
+        <section class="section-padding" id="about">
           <div class="container">
             <div class="row">
               <div class="col-xs-12 col-md-10 col-md-offset-1">
@@ -83,7 +83,7 @@ class Home extends React.Component {
           </div>
         </section>
         {/*  About-Area-End */}
-        <section class="feature-area section-padding-top" id="features_page">
+        <section class="feature-area section-padding-top" id="services">
           <div class="container">
             <div class="row">
               <div class="col-xs-12 col-sm-8 col-sm-offset-2">
@@ -228,7 +228,7 @@ class Home extends React.Component {
                   <div class="space-20"></div>
                   <form id="mc-form" onSubmit={this.handleSubmit}>
                     <input onChange={this.handleChange} type="email" name="email" value={email} class="control" placeholder="Enter your email" required="required" id="mc-email" />
-                    <button class="bttn-white active" type="submit"><span class="lnr lnr-location"></span> Send</button>
+                    <button class="bttn-white active" type="submit"><span class="lnr lnr-location"></span> <span className="d-none d-md-inline-block">Send</span></button>
                     <label class="mt10" for="mc-email"></label>
                   </form>
                 </div>
@@ -238,7 +238,7 @@ class Home extends React.Component {
         </div>
         {/*  Subscribe-Form-Area */}
         {/*  Footer-Area */}
-        <footer class="footer-area" id="contact_page">
+        <footer class="footer-area" id="contact">
           <div class="section-padding">
             <div class="container">
               <div class="row">

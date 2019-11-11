@@ -23,10 +23,10 @@ const PASSWORD = {
 const ROUTES = {
   INDEX: '/',
   DASHBOARD: '/dashboard',
-  ABOUT_US: '/about',
-  CONTACT_US: '/contact',
+  ABOUT_US: '/#about',
+  CONTACT_US: '/#contact',
   LOGIN: '/login',
-  SERVICES: '/services',
+  SERVICES: '/#services',
   PROFILE: '/profile',
   USERS: USER.INDEX,
   ADD_USERS: USER.ADD_USER,

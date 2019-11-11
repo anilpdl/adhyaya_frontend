@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import {
   Table, Input
 } from 'reactstrap';
+import AddIcon from 'mdi-react/AddIcon';
 
 import Panel from '../Panel/Panel';
+import EducationTableRow from './Education/EducationTableRow';
+import InputRow from './Education/InputRow';
 
 const educations = [{
   id: 1,
@@ -11,55 +14,111 @@ const educations = [{
   level: "Bachelors",
   board: "Government of Nepal",
   passed_year: 2069,
-}]
+}];
+
+const newData = {
+  institution: '',
+  level: 'SLC/SEE',
+  passed_year: '',
+  board: '',
+}
 
 class EducationInfo extends Component {
   constructor() {
     super();
     this.state = {
       educations: educations,
-      editField: {}
+      inputField: {},
+      errors: {},
+      isAddRowVisible: false,
     }
   }
 
-  editEducation = (education) => {
+  handleEdit = (education) => {
     this.setState(prevState => {
-      const editField = prevState.editField.id ? {} : education;
+      const inputField = prevState.inputField.id ? {} : education;
       return ({
-        editField
+        inputField,
+        isAddRowVisible: false
       })
     });
   }
 
   confirmEdit = () => {
-    alert(this.state.editField);
-    const updatedEducations = this.state.educations.push(this.state.editField);
-    this.setState({})
-    this.clearEdit();
+    const { inputField } = this.state;
+    const isValid = this.validateFields(inputField);
+    if (isValid) {
+      alert('addNew')
+      this.clearEdit();
+    }
   }
 
   handleChange = (e) => {
-    console.log(e)
     const { value, name } = e.target;
-    const { editField } = this.state;
-    const updatedField = { ...editField };
+    const { inputField } = this.state;
+    const updatedField = { ...inputField };
     updatedField[name] = value;
-    console.log(updatedField)
     this.setState({
-      editField: updatedField
+      inputField: updatedField
     });
   }
 
   clearEdit = () => {
-    this.setState({ editField: {} });
+    this.setState({ inputField: {} });
+  }
+
+  toggleAddNew = () => {
+    this.setState(({ isAddRowVisible }) => ({
+      isAddRowVisible: !isAddRowVisible,
+      inputField: newData
+    }));
   }
 
   addNew = () => {
-    
+    const { educations } = this.state;
+    const { inputField } = this.state;
+    const isValid = this.validateFields(inputField);
+    inputField.id = educations[educations.length - 1].id + 1;
+    if (isValid) {
+      this.setState({ educations: [...educations, inputField] })
+      this.toggleAddNew()
+    }
+  }
+
+  handleBlur = (e) => {
+    const { value, name } = e.target;
+    const { inputField } = this.state;
+    const updatedField = { ...inputField };
+    updatedField[name] = value.trim();
+    this.setState({
+      inputField: updatedField
+    });
+  }
+
+  validateFields = (inputField) => {
+    const errors = {};
+    let isValid = true;
+    const keys = Object.keys(inputField);
+    keys.forEach(key => {
+      if (key == "passed_year") {
+        return
+      }
+      const value = inputField[key];
+      const currentFieldIsValid = !!value;
+      if (!currentFieldIsValid) errors[key] = "This field is required";
+      isValid = isValid && currentFieldIsValid;
+    });
+
+    this.setState({ errors });
+
+    return isValid;
   }
 
   render() {
-    const { educations, editField } = this.state;
+    const {
+      educations, inputField, isAddRowVisible, errors
+    } = this.state;
+
     return (
       <Panel title="Education" >
         <Table responsive>
@@ -85,69 +144,37 @@ class EducationInfo extends Component {
           </thead>
           <tbody>
             {educations.map((education, index) => {
-              const disabled = editField.id !== education.id;
-              const displayData = disabled ? education : editField;
-              const { institution, level, board, passed_year } = displayData;
-              const className = disabled ? "bg-transparent border-0 w-100" : "form-control";
-
               return (
-                <tr>
-                  <td>{++index}</td>
-                  <td>
-                    <input
-                      value={institution}
-                      className={className}
-                      name="institution"
-                      onChange={this.handleChange}
-                      disabled={disabled}
-                    />
-                  </td>
-                  <td>
-                    {disabled ? level : <select name="level" className="form-control" defaultValue={level} onChange={this.handleChange}>
-                      <option>SLC/SEE</option>
-                      <option>+2/PCL</option>
-                      <option>Bachelors</option>
-                      <option>Masters</option>
-                    </select>}
-                  </td>
-                  <td>
-                    <input
-                      name="board"
-                      value={board}
-                      className={className}
-                      onChange={this.handleChange}
-                      disabled={disabled}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      value={passed_year}
-                      name="passed_year"
-                      type="number"
-                      className={className}
-                      onChange={this.handleChange}
-                      disabled={disabled}
-                    />
-                  </td>
-                  <td>
-                    {
-                      disabled ? <span className="btn-group">
-                        <button className="btn btn-sm">Delete</button>
-                        <button className="btn btn-sm" onClick={() => this.editEducation(education)}>Edit</button>
-                      </span> : <span className="btn-group">
-                          <button className="btn btn-sm" onClick={this.confirmEdit}>Confirm</button>
-                          <button className="btn btn-sm" onClick={this.clearEdit}>Cancel</button>
-                        </span>
-                    }
-                  </td>
-                </tr>
+                <EducationTableRow
+                  key={index}
+                  count={++index}
+                  handleChange={this.handleChange}
+                  confirmEdit={this.confirmEdit}
+                  clearEdit={this.clearEdit}
+                  handleEdit={this.handleEdit}
+                  education={education}
+                  inputField={inputField}
+                />
               );
             })}
+            <InputRow
+              isVisible={isAddRowVisible}
+              clearEdit={this.toggleAddNew}
+              handleChange={this.handleChange}
+              confirmEdit={this.addNew}
+              data={inputField}
+              errors={errors}
+            />
           </tbody>
         </Table>
-        <div className="w-100 d-flex justify-content-center border-top pt-4">
-          <button className="btn btn-primary" onPress={this.addNew}> + Add new</button>
-        </div>
+        {
+          !isAddRowVisible && (
+            <div className="w-100 d-flex justify-content-center border-top pt-4">
+              <button className="btn btn-primary" onClick={this.toggleAddNew}>
+                <AddIcon /> Add new</button>
+            </div>
+          )
+        }
       </Panel>
     );
   }

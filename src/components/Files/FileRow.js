@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import EyeIcon from 'mdi-react/EyeIcon';
 import DownloadIcon from 'mdi-react/DownloadIcon';
-import TrashIcon from 'mdi-react/TrashOutlineIcon'
+import TrashIcon from 'mdi-react/TrashOutlineIcon';
 import FileSaver from 'file-saver';
 
 import FileThumbnail from './FileThumbnail';
