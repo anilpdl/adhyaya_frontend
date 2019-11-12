@@ -57,14 +57,14 @@ class InputRow extends Component {
             className="form-control"
             onChange={handleChange}
           />
-          {errors.passed_year || ('(Leave empty if current)')}
+          {errors.passed_year || ('(Leave empty if pending)')}
         </td>
         <td>
           <span className="btn-group">
-            <button className="btn btn-sm btn-primary p-2 px-3" onClick={confirmEdit}>
+            <button className="btn btn-sm p-2 px-3" onClick={confirmEdit}>
               <CheckIcon />
             </button>
-            <button className="btn btn-secondary btn-sm p-2 px-3" onClick={clearEdit}>
+            <button className="btn btn-danger btn-sm p-2 px-3" onClick={clearEdit}>
               <TimesIcon />
             </button>
           </span>

@@ -18,12 +18,13 @@ class EducationTableRow extends Component {
       handleEdit,
       education,
       inputField,
-      count
+      count,
+      toggleDeleteModal
     } = this.props;
 
     const disabled = inputField.id !== education.id;
     const displayData = disabled ? education : inputField;
-    const { institution, level, board, passed_year } = displayData;
+    const { id, institution, level, board, passed_year } = displayData;
     const className = disabled ? "bg-transparent border-0 w-100" : "form-control";
 
     return (
@@ -79,7 +80,7 @@ class EducationTableRow extends Component {
               <button className="btn btn-sm p-2 px-3" onClick={() => handleEdit(education)}>
                 <EditIcon size={30} />
               </button>
-              <button className="btn btn-danger btn-sm p-2 px-3">
+              <button className="btn btn-danger btn-sm p-2 px-3" onClick={() => toggleDeleteModal(id)}>
                 <TrashIcon size={30} />
               </button>
             </span> : <span className="btn-group">

@@ -7,6 +7,10 @@ import AddIcon from 'mdi-react/AddIcon';
 import Panel from '../Panel/Panel';
 import EducationTableRow from './Education/EducationTableRow';
 import InputRow from './Education/InputRow';
+import EducationApi from '../../apis/User/Education';
+import { getUserObject } from '../../constants/LocalStorageManager';
+import Toaster from '../Toaster/ToastManager';
+import DeleteModal from './Education/DeleteModal';
 
 const educations = [{
   id: 1,
@@ -27,11 +31,26 @@ class EducationInfo extends Component {
   constructor() {
     super();
     this.state = {
-      educations: educations,
+      educations: [],
       inputField: {},
       errors: {},
       isAddRowVisible: false,
+      isDeleteModalVisible: false,
+      deleteId: null
     }
+  }
+
+  componentDidMount() {
+    this.fetchAll();
+  }
+
+  fetchAll() {
+    const { id } = getUserObject();
+    EducationApi.getAll(id).then(({ data }) => {
+      this.setState({ educations: data });
+    }).catch(() => {
+      Toaster.getErrorToaster('Error fetching data');
+    });
   }
 
   handleEdit = (education) => {
@@ -40,7 +59,29 @@ class EducationInfo extends Component {
       return ({
         inputField,
         isAddRowVisible: false
-      })
+      });
+    });
+  }
+
+  updateEducationField = () => {
+    const { inputField } = this.state;
+    const { id } = inputField;
+    EducationApi.update(inputField, id).then(() => {
+      Toaster.getSuccessToaster('Successfully updated education');
+      this.clearEdit();
+      this.fetchAll();
+    }).catch(e => {
+      Toaster.getErrorToaster('Failed to update education');
+    })
+  }
+
+  addNewEducation = () => {
+    const { inputField } = this.state;
+    const { id } = getUserObject();
+    EducationApi.addNew(inputField, id).then(({ data }) => {
+      Toaster.getSuccessToaster('Successfully added education');
+      this.toggleAddNew();
+      this.fetchAll();
     });
   }
 
@@ -48,12 +89,12 @@ class EducationInfo extends Component {
     const { inputField } = this.state;
     const isValid = this.validateFields(inputField);
     if (isValid) {
-      alert('addNew')
-      this.clearEdit();
+      this.updateEducationField();
     }
   }
 
   handleChange = (e) => {
+    console.log(e.target)
     const { value, name } = e.target;
     const { inputField } = this.state;
     const updatedField = { ...inputField };
@@ -75,13 +116,11 @@ class EducationInfo extends Component {
   }
 
   addNew = () => {
-    const { educations } = this.state;
     const { inputField } = this.state;
     const isValid = this.validateFields(inputField);
-    inputField.id = educations[educations.length - 1].id + 1;
+
     if (isValid) {
-      this.setState({ educations: [...educations, inputField] })
-      this.toggleAddNew()
+      this.addNewEducation();
     }
   }
 
@@ -97,8 +136,10 @@ class EducationInfo extends Component {
 
   validateFields = (inputField) => {
     const errors = {};
+    const { level, institution, board, passed_year } = inputField;
+    const data = { level, institution, board, passed_year };
     let isValid = true;
-    const keys = Object.keys(inputField);
+    const keys = Object.keys(data);
     keys.forEach(key => {
       if (key == "passed_year") {
         return
@@ -114,13 +155,43 @@ class EducationInfo extends Component {
     return isValid;
   }
 
+  toggleDeleteModal = (id) => {
+    const idType = typeof id;
+    const deleteId = (idType == 'string' || idType == 'number') ? id : undefined;
+    this.setState((prevState) => ({
+      deleteId,
+      isDeleteModalVisible: !prevState.isDeleteModalVisible
+    }));
+  }
+
+  confirmDelete = () => {
+    const { deleteId } = this.state;
+    if (deleteId) {
+      EducationApi.delete(deleteId).then(() => {
+        Toaster.getSuccessToaster('Education deleted successfully');
+        this.fetchAll();
+        this.toggleDeleteModal();
+      }).catch(() => {
+        Toaster.getErrorToaster('Error deleting field');
+        this.toggleDeleteModal()
+      })
+    }
+  }
+
   render() {
     const {
-      educations, inputField, isAddRowVisible, errors
+      educations, inputField, isAddRowVisible, errors, deleteId, isDeleteModalVisible
     } = this.state;
 
     return (
       <Panel title="Education" >
+        <DeleteModal
+          deleteId={deleteId}
+          confirmDelete={this.confirmDelete}
+          toggleModal={this.toggleDeleteModal}
+          isVisible={isDeleteModalVisible}
+        />
+        <Input className=" float-right col-3 mb-3" />
         <Table responsive>
           <thead>
             <tr>
@@ -154,6 +225,7 @@ class EducationInfo extends Component {
                   handleEdit={this.handleEdit}
                   education={education}
                   inputField={inputField}
+                  toggleDeleteModal={this.toggleDeleteModal}
                 />
               );
             })}

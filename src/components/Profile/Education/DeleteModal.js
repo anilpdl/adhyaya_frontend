@@ -1,0 +1,29 @@
+import React from 'react';
+import { Modal, ButtonToolbar, Button } from 'reactstrap';
+
+const DeleteModal = ({
+  deleteId, confirmDelete, toggleModal, isVisible
+}) => {
+  return (
+    <Modal
+      isOpen={isVisible}
+      toggle={toggleModal}
+      className="modal-dialog--danger"
+    >
+      <div className="modal__header">
+        <button className="lnr lnr-cross modal__close-btn" onClick={toggleModal} />
+        <span className="lnr lnr-cross-circle modal__title-icon" />
+        <h4 className="bold-text  modal__title">Delete education field</h4>
+      </div>
+      <div className="modal__body">
+        Are you sure you want to delete education field?
+      </div>
+      <ButtonToolbar className="modal__footer">
+        <Button onClick={toggleModal}>Cancel</Button>{' '}
+        <Button className="btn-danger text-light" outline onClick={() => confirmDelete(deleteId)}>Ok</Button>
+      </ButtonToolbar>
+    </Modal>
+  );
+}
+
+export default DeleteModal;
