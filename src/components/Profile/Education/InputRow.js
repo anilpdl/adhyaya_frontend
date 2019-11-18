@@ -25,7 +25,7 @@ class InputRow extends Component {
             name="institution"
             onChange={handleChange}
           />
-          {errors.institution}
+          <div className="text-danger">{errors.institution}</div>
         </td>
         <td>
           <select
@@ -47,7 +47,7 @@ class InputRow extends Component {
             className="form-control"
             onChange={handleChange}
           />
-          {errors.board}
+          <div className="text-danger">{errors.board}</div>
         </td>
         <td>
           <input

@@ -6,7 +6,7 @@ import KeyVariantIcon from 'mdi-react/KeyVariantIcon';
 export const PasswordField = ({ label, name, value, handleChange, togglePassword, placeholder, showPassword, error }) => {
   return (
     <FormGroup className="form__form-group">
-      <Label for="password" className="form__form-group-label">{label}</Label>
+      <Label htmlFor="password" className="form__form-group-label">{label}</Label>
       <div className="form__form-group-field">
         <div className="form__form-group-icon">
           <KeyVariantIcon />

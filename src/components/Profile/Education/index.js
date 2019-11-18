@@ -4,13 +4,13 @@ import {
 } from 'reactstrap';
 import AddIcon from 'mdi-react/AddIcon';
 
-import Panel from '../Panel/Panel';
-import EducationTableRow from './Education/EducationTableRow';
-import InputRow from './Education/InputRow';
-import EducationApi from '../../apis/User/Education';
-import { getUserObject } from '../../constants/LocalStorageManager';
-import Toaster from '../Toaster/ToastManager';
-import DeleteModal from './Education/DeleteModal';
+import Panel from '../../Panel/Panel';
+import EducationTableRow from './EducationTableRow';
+import InputRow from './InputRow';
+import EducationApi from '../../../apis/User/Education';
+import { getUserObject } from '../../../constants/LocalStorageManager';
+import Toaster from '../../Toaster/ToastManager';
+import DeleteModal from './DeleteModal';
 
 const educations = [{
   id: 1,
@@ -94,7 +94,6 @@ class EducationInfo extends Component {
   }
 
   handleChange = (e) => {
-    console.log(e.target)
     const { value, name } = e.target;
     const { inputField } = this.state;
     const updatedField = { ...inputField };
@@ -184,7 +183,7 @@ class EducationInfo extends Component {
     } = this.state;
 
     return (
-      <Panel title="Education" >
+      <Panel title="Education" table>
         <DeleteModal
           deleteId={deleteId}
           confirmDelete={this.confirmDelete}

@@ -1,4 +1,5 @@
 import * as localStorageManager from 'constants/LocalStorageManager';
+import { toast } from 'react-toastify';
 
 /**
  * Interceptor to catch Unauthenticated responses.
@@ -8,6 +9,7 @@ import * as localStorageManager from 'constants/LocalStorageManager';
 export function unAuthenticatedResponseHandlerIncerceptor(err) {
   if (err && err.response && err.response.status === 401) {
     localStorageManager.clear();
+    toast.error('Authentication Error');
   }
 
   throw err;

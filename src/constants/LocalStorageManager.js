@@ -11,7 +11,7 @@ function getFromLocalStorage(name) {
   return localStorage.getItem(name);
 }
 
-function deleteFromLocalStorage(name) {
+export function deleteFromLocalStorage(name) {
   localStorage.removeItem(name);
 }
 

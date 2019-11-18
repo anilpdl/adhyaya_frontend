@@ -87,7 +87,7 @@ class EducationTableRow extends Component {
                 <button className="btn btn-sm p-2 px-3" onClick={confirmEdit}>
                   <CheckIcon />
                 </button>
-                <button className="btn btn-sm p-2 px-3" onClick={clearEdit}>
+                <button className="btn btn-danger btn-sm p-2 px-3" onClick={clearEdit}>
                   <TimesIcon />
                 </button>
               </span>

@@ -40,7 +40,7 @@ class LogInForm extends PureComponent {
           </div>
         </FormGroup>
         <FormGroup className="form__form-group">
-          <Label for="password" className="form__form-group-label">Password</Label>
+          <Label htmlFor="password" className="form__form-group-label">Password</Label>
           <div className="form__form-group-field">
             <div className="form__form-group-icon">
               <KeyVariantIcon />
