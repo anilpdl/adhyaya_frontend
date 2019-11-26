@@ -9,7 +9,6 @@ import { toast } from 'react-toastify';
 export function unAuthenticatedResponseHandlerIncerceptor(err) {
   if (err && err.response && err.response.status === 401) {
     localStorageManager.clear();
-    toast.error('Authentication Error');
   }
 
   throw err;

@@ -97,9 +97,13 @@ class UserProfile extends Component {
             {this.renderChildren()}
           </CardBody>
         </Card>
-        <PersonalInfo />
+        <div className="col-12">
+          <div className="row">
+            <PersonalInfo />
+            <ContactInfo />
+          </div>
+        </div>
         <EducationInfo />
-        <ContactInfo />
       </Col>
     )
   }

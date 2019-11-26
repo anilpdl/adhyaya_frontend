@@ -182,6 +182,8 @@ class EducationInfo extends Component {
       educations, inputField, isAddRowVisible, errors, deleteId, isDeleteModalVisible
     } = this.state;
 
+    const hasEducationList = educations.length > 0;
+
     return (
       <Panel title="Education" table>
         <DeleteModal
@@ -190,8 +192,8 @@ class EducationInfo extends Component {
           toggleModal={this.toggleDeleteModal}
           isVisible={isDeleteModalVisible}
         />
-        <Input className=" float-right col-3 mb-3" />
-        <Table responsive>
+        {/* <Input className=" float-right col-3 mb-3" /> */}
+        <Table responsive className={!(hasEducationList || isAddRowVisible) && "d-none"}>
           <thead>
             <tr>
               <td></td>
