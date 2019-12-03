@@ -5,6 +5,8 @@ import { Input } from 'reactstrap';
 import Panel from '../../Panel/Panel';
 import 'react-datepicker/dist/react-datepicker.css';
 import ListInfo from './ListInfo';
+import PersonalInfoApi from '../../../apis/User/PersonalInfo';
+import { getUserObject } from '../../../constants/LocalStorageManager';
 
 
 class PersonalInfo extends React.Component {
@@ -37,6 +39,11 @@ class PersonalInfo extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const { formValues } = this.state;
+    const { id } = getUserObject();
+    const formData = {}
+    Object.keys(formValues).forEach(key => formData[key] = formValues[key].value);
+    PersonalInfoApi.addNew(formData, id).then(console.log).catch(console.log)
   }
 
   cancel = (e) => {
