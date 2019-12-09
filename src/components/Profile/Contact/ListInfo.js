@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import AddIcon from 'mdi-react/AddIcon';
 
 class ListInfo extends Component {
@@ -9,10 +8,11 @@ class ListInfo extends Component {
 
   render() {
     const {
-      dob,
-      father_name,
-      mother_name,
-      marital_status,
+      province,
+      district,
+      municipality,
+      tole,
+      ward,
       isNotUpdated,
       toggleEdit
     } = this.props;
@@ -21,7 +21,7 @@ class ListInfo extends Component {
       return (
         <div className='d-flex flex-column justify-content-between align-items-center'>
           <h3>Oops!</h3>
-          <p>You haven't added your personal details.</p>
+          <p>You haven't updated your contact details.</p>
           <button className='btn btn-primary m-5' onClick={toggleEdit}>
             <AddIcon /> Update
           </button>
@@ -32,27 +32,33 @@ class ListInfo extends Component {
     return (
       <div className='container'>
         <div className='form__form-group'>
-          <span className='form__form-group-label'>Date of birth: </span>
+          <span className='form__form-group-label'>Province </span>
           <div className='form__form-group-field'>
-            <div>{dob.value && moment(dob.value).format('MMMM DD, YYYY')}</div>
+            <div>{province.value}</div>
           </div>
         </div>
         <div className='form__form-group'>
-          <span className='form__form-group-label'>Father's Name: </span>
+          <span className='form__form-group-label'>District </span>
           <div className='form__form-group-field'>
-            <div>{father_name.value}</div>
+            <div>{district.value}</div>
           </div>
         </div>
         <div className='form__form-group'>
-          <span className='form__form-group-label'>Mother's Name: </span>
+          <span className='form__form-group-label'>Municipality/VDC </span>
           <div className='form__form-group-field'>
-            <div>{mother_name.value}</div>
+            <div>{municipality.value}</div>
           </div>
         </div>
         <div className='form__form-group'>
-          <span className='form__form-group-label'>Marital Status</span>
+          <span className='form__form-group-label'>Ward</span>
           <div className='form__form-group-field'>
-            <div>{marital_status.value}</div>
+            <div>{ward.value}</div>
+          </div>
+        </div>
+        <div className='form__form-group'>
+          <span className='form__form-group-label'>Tole</span>
+          <div className='form__form-group-field'>
+            <div>{tole.value}</div>
           </div>
         </div>
       </div>
