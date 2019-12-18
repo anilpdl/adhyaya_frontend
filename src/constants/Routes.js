@@ -1,6 +1,6 @@
 const USER = {
   INDEX: '/users',
-  ADD_USER: '/users/new',
+  ADD_USER: '/users/new'
 };
 
 const USER_INVITATIONS = {
@@ -18,7 +18,7 @@ const PASSWORD = {
   INDEX: '/password',
   RESET: '/password/reset/:resetToken',
   FORGOT: '/password/forgot'
-}
+};
 
 const ROUTES = {
   INDEX: '/',
@@ -29,6 +29,7 @@ const ROUTES = {
   SERVICES: '/#services',
   PROFILE: '/profile',
   USERS: USER.INDEX,
+  STUDENT_DATA: '/users/:userId/profile',
   ADD_USERS: USER.ADD_USER,
   LIST_USERS: USER.INDEX,
   USER_INVITATIONS_INDEX: USER_INVITATIONS.INDEX,
@@ -39,6 +40,6 @@ const ROUTES = {
   PASSWORD_INDEX: PASSWORD.INDEX,
   FORGOT_PASSWORD: PASSWORD.FORGOT,
   RESET_PASSWORD: PASSWORD.RESET
-}
+};
 
 export default ROUTES;

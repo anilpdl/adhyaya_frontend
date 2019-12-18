@@ -104,8 +104,8 @@ class PersonalInfo extends React.Component {
   }
 
   fetchPersonalInfo = () => {
-    const { id } = getUserObject();
-    PersonalInfoApi.getAll(id)
+    const { userId } = this.props;
+    PersonalInfoApi.getAll(userId)
       .then(({ data }) => {
         if (!data) {
           this.setState({ isNotUpdated: true });
@@ -145,12 +145,12 @@ class PersonalInfo extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const { formValues } = this.state;
-    const { id } = getUserObject();
+    const { userId } = this.props;
     const formData = {};
     Object.keys(formValues).forEach(
       key => (formData[key] = formValues[key].value)
     );
-    PersonalInfoApi.addNew(formData, id)
+    PersonalInfoApi.addNew(formData, userId)
       .then(() => {
         Toaster.getSuccessToaster('Successfully updated details');
         this.fetchPersonalInfo();

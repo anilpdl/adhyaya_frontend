@@ -35,8 +35,9 @@ class EducationInfo extends Component {
   }
 
   fetchAll() {
-    const { id } = getUserObject();
-    EducationApi.getAll(id)
+    const { userId } = this.props;
+
+    EducationApi.getAll(userId)
       .then(({ data }) => {
         this.setState({ educations: data });
       })
@@ -71,8 +72,9 @@ class EducationInfo extends Component {
 
   addNewEducation = () => {
     const { inputField } = this.state;
-    const { id } = getUserObject();
-    EducationApi.addNew(inputField, id).then(({ data }) => {
+    const { userId } = this.props;
+
+    EducationApi.addNew(inputField, userId).then(({ data }) => {
       Toaster.getSuccessToaster('Successfully added education');
       this.toggleAddNew();
       this.fetchAll();

@@ -4,6 +4,8 @@ import { Container, Row, Col, Card, CardBody } from 'reactstrap';
 import DashboardWidget from '../components/Dashboard/DashboardWidget';
 import ROUTES from '../constants/Routes';
 import DashboardApi from '../apis/Dashboard';
+import { getUserObject } from '../constants/LocalStorageManager';
+import UserApi from '../apis/User';
 class Dashboard extends Component {
   constructor() {
     super();
@@ -11,20 +13,27 @@ class Dashboard extends Component {
       dashboard: {
         user_count: 0,
         file_count: 0,
-        user_invitation_count: 0,
+        user_invitation_count: 0
       }
-    }
+    };
   }
 
   componentDidMount() {
-    this.fetchDashboardDetails()
+    this.fetchDashboardDetails();
   }
 
   fetchDashboardDetails = () => {
-    DashboardApi.getDetails().then(({ data }) => {
-      this.setState({ dashboard: data});
-    }).catch(console.log)
-  }
+    const { id } = getUserObject();
+    UserApi.getDetails(id)
+      .then(console.log)
+      .catch(console.log);
+    DashboardApi.getDetails()
+      .then(({ data }) => {
+        this.setState({ dashboard: data });
+      })
+      .catch(console.log);
+  };
+
   render() {
     const { dashboard } = this.state;
     const { user_count, user_invitation_count, file_count } = dashboard;
@@ -33,26 +42,26 @@ class Dashboard extends Component {
       <Container>
         <Row>
           <DashboardWidget
-            title="Students"
-            subtitle="Total number of students registered"
+            title='Students'
+            subtitle='Total number of students registered'
             count={user_count}
             path={ROUTES.LIST_USERS}
           />
           <DashboardWidget
-            title="Invitations"
-            subtitle="Total number of pending invitations"
+            title='Invitations'
+            subtitle='Total number of pending invitations'
             count={user_invitation_count}
             path={ROUTES.USER_INVITATIONS_INDEX}
           />
           <DashboardWidget
-            title="Files"
-            subtitle="Total number of files uploaded"
+            title='Files'
+            subtitle='Total number of files uploaded'
             count={file_count}
             path={ROUTES.FILES_INDEX}
           />
         </Row>
       </Container>
-    )
+    );
   }
 }
 

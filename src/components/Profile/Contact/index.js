@@ -96,8 +96,9 @@ class ContactInfo extends Component {
   }
 
   fetchContactDetails() {
-    const { id } = getUserObject();
-    ContactApi.getAll(id)
+    const { userId } = this.props;
+
+    ContactApi.getAll(userId)
       .then(({ data }) => {
         if (!data) {
           this.setState({ isNotUpdated: true });
@@ -130,12 +131,13 @@ class ContactInfo extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { formValues } = this.state;
-    const { id } = getUserObject();
+    const { userId } = this.props;
+
     const formData = {};
     Object.keys(formValues).forEach(
       key => (formData[key] = formValues[key].value)
     );
-    ContactApi.addNew(formData, id)
+    ContactApi.addNew(formData, userId)
       .then(() => {
         this.fetchContactDetails();
         Toaster.getSuccessToaster('Successfully updated details');
