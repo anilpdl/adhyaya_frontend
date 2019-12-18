@@ -6,6 +6,8 @@ import ROUTES from '../constants/Routes';
 import DashboardApi from '../apis/Dashboard';
 import { getUserObject } from '../constants/LocalStorageManager';
 import UserApi from '../apis/User';
+import { isAdminAccount } from '../utils/userHelpers';
+
 class Dashboard extends Component {
   constructor() {
     super();
@@ -37,7 +39,8 @@ class Dashboard extends Component {
   render() {
     const { dashboard } = this.state;
     const { user_count, user_invitation_count, file_count } = dashboard;
-
+    const isAdmin = isAdminAccount();
+    if (!isAdmin) return null;
     return (
       <Container>
         <Row>

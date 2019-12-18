@@ -5,6 +5,7 @@ import { Collapse } from 'reactstrap';
 
 import ROUTES from 'constants/Routes';
 import TopbarMenuLink from './TopbarMenuLink';
+import { isAdminAccount } from '../../../utils/userHelpers';
 
 const logo = require('assets/img/logo.png');
 
@@ -22,7 +23,8 @@ export default class TopbarProfile extends PureComponent {
 
   render() {
     const { logOut, name, picture } = this.props;
-    const imgSrc = picture? picture.url: logo;
+    const imgSrc = picture ? picture.url : logo;
+    const isAdmin = isAdminAccount();
 
     return (
       <div className="topbar__profile">
@@ -34,7 +36,9 @@ export default class TopbarProfile extends PureComponent {
         {this.state.collapse && <button type="button" className="topbar__back" onClick={this.toggle} />}
         <Collapse isOpen={this.state.collapse} className="topbar__menu-wrap">
           <div className="topbar__menu">
-            <TopbarMenuLink title="Profile" icon="cog" path={ROUTES.PROFILE} />
+            {isAdmin &&
+              <TopbarMenuLink title="Profile" icon="cog" path={ROUTES.PROFILE} />
+            }
             <div className="topbar__menu-divider" />
             <span className="topbar__link" onClick={logOut} role="presentation">
               <span className="topbar__link-icon lnr lnr-exit" />

@@ -12,7 +12,7 @@ import Toaster from './components/Toaster';
 import Dashboard from './containers/Dashboard';
 import Layout from './containers/Layout';
 import MainWrapper from './components/MainWrapper/MainWrapper';
-import { isUserAuthenticated } from './utils/userHelpers';
+import { isUserAuthenticated, isAdminAccount } from './utils/userHelpers';
 import Services from './containers/Services';
 import UserInvitation from './containers/UserInvitation';
 import InvalidToken from './components/UserInvitation/InvalidToken';
@@ -61,12 +61,13 @@ const PublicRoutes = ({ component: Component, ...rest }) => (
   />
 );
 
-const ProtectedRoutes = ({ component: Component, ...rest }) => {
+const ProtectedRoutes = ({ component: Component, admin, ...rest }) => {
   return (
     <Route
       {...rest}
       render={props => {
         const isAuthenticated = isUserAuthenticated();
+        if (admin && !isAdminAccount()) return null;
         if (isAuthenticated)
           return <RouteWrapper component={Component} {...props} />;
         return <Redirect to={ROUTES.LOGIN} />;
@@ -153,11 +154,12 @@ class App extends Component {
             <PublicRoutes path={ROUTES.SERVICES} component={Services} />
             <ProtectedRoutes
               exact
+              admin
               path={ROUTES.DASHBOARD}
               component={Dashboard}
             />
             <ProtectedRoutes
-              excat
+              exact
               path={ROUTES.PROFILE}
               component={UserProfile}
             />

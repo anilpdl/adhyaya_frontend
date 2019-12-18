@@ -6,7 +6,8 @@ import UserApi from '../../apis/User';
 import Toaster from '../../components/Toaster/ToastManager';
 import * as LocalStorageManager from '../../constants/LocalStorageManager';
 import ROUTES from '../../constants/Routes';
-import { isUserAuthenticated } from '../../utils/userHelpers';
+import { isUserAuthenticated, isAdminAccount } from '../../utils/userHelpers';
+import { USERS } from '../../constants';
 
 class LogIn extends Component {
   constructor() {
@@ -42,18 +43,23 @@ class LogIn extends Component {
       const { user, token } = data;
       LocalStorageManager.setToken(token);
       LocalStorageManager.setUserObject(user);
+      const { role } = user;
+      let pushUrl = ROUTES.PROFILE;
+      if (role === USERS.ADMIN)
+        pushUrl = ROUTES.DASHBOARD;
+      this.props.history.push(pushUrl);
       this.setState({ isAuthenticated: true });
     }).catch((data) => {
-      const errorMsg = data.response? data.response.data.message: data.message;
+      const errorMsg = data.response ? data.response.data.message : data.message;
       Toaster.getErrorToaster(errorMsg, this.toastId);
     });
   };
 
   render() {
     const { email, password, isAuthenticated } = this.state;
-
-    if(isAuthenticated) {
-      return <Redirect to={ROUTES.DASHBOARD} />
+    const isAdmin = isAdminAccount();
+    if (isAuthenticated) {
+      return <Redirect to={isAdmin?ROUTES.DASHBOARD: ROUTES.PROFILE} />
     }
 
     return (
