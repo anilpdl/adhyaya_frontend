@@ -195,7 +195,6 @@ class EducationInfo extends Component {
           toggleModal={this.toggleDeleteModal}
           isVisible={isDeleteModalVisible}
         />
-        {/* <Input className=" float-right col-3 mb-3" /> */}
         <Table
           responsive
           className={!(hasEducationList || isAddRowVisible) && 'd-none'}

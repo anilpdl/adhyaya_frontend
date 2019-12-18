@@ -71,7 +71,7 @@ export default class Panel extends PureComponent {
               collapse ? '' : ' panel--collapse'
             }`}
           >
-            <CardBody className='panel__body'>
+            <CardBody className='panel__body w-100'>
               {loading ? (
                 <div className='panel__refresh'>
                   <LoadingIcon />
