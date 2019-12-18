@@ -81,11 +81,17 @@ const UserRoutes = () => {
     <Switch>
       <ProtectedRoutes
         exact
+        admin
         path={ROUTES.STUDENT_DATA}
         component={UserProfile}
       />
-      <ProtectedRoutes exact path={ROUTES.ADD_USERS} component={Users} />
-      <ProtectedRoutes exact path={ROUTES.LIST_USERS} component={UsersList} />
+      <ProtectedRoutes admin exact path={ROUTES.ADD_USERS} component={Users} />
+      <ProtectedRoutes
+        admin
+        exact
+        path={ROUTES.LIST_USERS}
+        component={UsersList}
+      />
     </Switch>
   );
 };
@@ -116,6 +122,7 @@ const UserInvitationRoute = () => {
       <Route exact path={ROUTES.INVALID_INVITATION} component={InvalidToken} />
       <Route exact path={ROUTES.USER_INVITATIONS} component={UserInvitation} />
       <ProtectedRoutes
+        admin
         path={ROUTES.USER_INVITATIONS_INDEX}
         component={InvitationsList}
       />
@@ -166,6 +173,7 @@ class App extends Component {
             <Route path={ROUTES.FILES_INDEX} component={FileRoutes} />
             <Route path={ROUTES.USERS} component={UserRoutes} />
             <Route path={ROUTES.PASSWORD_INDEX} component={PasswordRoutes} />
+            <Route render={() => (<h1>Oops! 404 page not found</h1>)} />
           </main>
         </MainWrapper>
       </BrowserRouter>
