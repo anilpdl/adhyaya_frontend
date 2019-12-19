@@ -40,7 +40,7 @@ class Home extends React.Component {
             <div className="row">
               <div className="col-xs-12 hidden-sm col-md-5">
                 <figure className="mobile-image wow fadeInUp" data-wow-delay="0.2s">
-                  <img src={require("assets/appy/images/header-mobile.png")} />
+                  <img style={{ opacity: 0}} src={require("assets/appy/images/header-mobile.png")} />
                 </figure>
               </div>
               <div className="col-xs-12 col-md-7">
@@ -121,7 +121,7 @@ class Home extends React.Component {
               </div>
               <div className="hidden-xs hidden-sm col-md-4">
                 <figure className="mobile-image">
-                  <img src={require("assets/appy/images/feature-image.png")} alt="Feature Photo" />
+                  <img style={{ opacity: 0}} src={require("assets/appy/images/feature-image.png")} alt="Feature Photo" />
                 </figure>
               </div>
               <div className="col-xs-12 col-sm-6 col-md-4">

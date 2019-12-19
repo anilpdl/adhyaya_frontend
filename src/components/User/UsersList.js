@@ -53,6 +53,12 @@ class UsersList extends Component {
     );
   };
 
+  navigateToFilesList = id => {
+    const { history } = this.props;
+
+    history.push(`${ROUTES.FILES_INDEX}?id=${id}`);
+  };
+
   render() {
     const { users, isLoading } = this.state;
     const usersList = users.map(
@@ -72,6 +78,17 @@ class UsersList extends Component {
             <td> {email} </td>
             <td> {formatDate(created_at)} </td>
             <td> {lastLogin} </td>
+            <td>
+              <button
+                className='btn btn-sm btn-primary'
+                onClick={e => {
+                  e.stopPropagation();
+                  this.navigateToFilesList(id);
+                }}
+              >
+                View files
+              </button>
+            </td>
           </tr>
         );
       }
@@ -102,6 +119,7 @@ class UsersList extends Component {
                   <th>Email</th>
                   <th>Created Date</th>
                   <th>Last Login</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>{this.renderTableContent(usersList)}</tbody>

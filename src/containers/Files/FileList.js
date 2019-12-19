@@ -7,6 +7,7 @@ import FileRow from 'components/Files/FileRow';
 import { getUserObject } from '../../constants/LocalStorageManager';
 import FileModal from '../../components/Files/FileModal';
 import DeleteModal from '../../components/Files/FileDeleteModal';
+import { fetchQueryParams } from '../../utils/routes';
 
 class FileList extends Component {
   constructor() {
@@ -105,9 +106,17 @@ class FileList extends Component {
 
   render() {
     const { files, isFileModalVisible, file, isFetchingFile, isDeleteModalVisible, deleteFile } = this.state;
-    const fileList = files.map(file => <FileRow
+    const query = fetchQueryParams(this.props.location.search);
+    console.log(query)
+    const fileList = files.map(file => {
+      if (query && file.user.id !== query)
+        return null;
+      return (<FileRow
       toggleApproveModal={this.toggleApproveModal} key={file.id} file={file} toggleDeleteModal={this.toggleDeleteModal}
-    />);
+      />)
+    });
+    const hasFiles = fileList.find(file => file);
+
     return (
       <Col>
         <Card>
@@ -143,7 +152,9 @@ class FileList extends Component {
                 </tr>
               </thead>
               <tbody>
-                {fileList}
+                {hasFiles ? fileList : <tr>
+                  <td colSpan="8"> No files to display</td>
+                </tr>}
               </tbody>
             </Table>
           </CardBody>

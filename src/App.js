@@ -150,30 +150,32 @@ class App extends Component {
         <MainWrapper>
           <Toaster />
           <main>
-            <PublicRoutes exact path={ROUTES.INDEX} component={Home} />
-            <PublicRoutes path={ROUTES.ABOUT_US} component={About} />
-            <PublicRoutes path={ROUTES.CONTACT_US} component={Contact} />
-            <PublicRoutes path={ROUTES.LOGIN} component={LogIn} />
-            <Route
-              path={ROUTES.USER_INVITATIONS_INDEX}
-              component={UserInvitationRoute}
-            />
-            <PublicRoutes path={ROUTES.SERVICES} component={Services} />
-            <ProtectedRoutes
-              exact
-              admin
-              path={ROUTES.DASHBOARD}
-              component={Dashboard}
-            />
-            <ProtectedRoutes
-              exact
-              path={ROUTES.PROFILE}
-              component={UserProfile}
-            />
-            <Route path={ROUTES.FILES_INDEX} component={FileRoutes} />
-            <Route path={ROUTES.USERS} component={UserRoutes} />
-            <Route path={ROUTES.PASSWORD_INDEX} component={PasswordRoutes} />
-            <Route render={() => (<h1>Oops! 404 page not found</h1>)} />
+            <Switch>
+              <PublicRoutes exact path={ROUTES.INDEX} component={Home} />
+              <PublicRoutes path={ROUTES.ABOUT_US} component={About} />
+              <PublicRoutes path={ROUTES.CONTACT_US} component={Contact} />
+              <PublicRoutes path={ROUTES.LOGIN} component={LogIn} />
+              <Route
+                path={ROUTES.USER_INVITATIONS_INDEX}
+                component={UserInvitationRoute}
+              />
+              <PublicRoutes path={ROUTES.SERVICES} component={Services} />
+              <ProtectedRoutes
+                exact
+                admin
+                path={ROUTES.DASHBOARD}
+                component={Dashboard}
+              />
+              <ProtectedRoutes
+                exact
+                path={ROUTES.PROFILE}
+                component={UserProfile}
+              />
+              <Route path={ROUTES.FILES_INDEX} component={FileRoutes} />
+              <Route path={ROUTES.USERS} component={UserRoutes} />
+              <Route path={ROUTES.PASSWORD_INDEX} component={PasswordRoutes} />
+              <Route render={() => <h1>Oops! 404 page not found</h1>} />
+            </Switch>
           </main>
         </MainWrapper>
       </BrowserRouter>
