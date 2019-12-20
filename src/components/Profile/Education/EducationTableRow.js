@@ -19,8 +19,11 @@ class EducationTableRow extends Component {
       education,
       inputField,
       count,
-      toggleDeleteModal
+      toggleDeleteModal,
+      errors
     } = this.props;
+
+    console.log(errors)
 
     const disabled = inputField.id !== education.id;
     const displayData = disabled ? education : inputField;
@@ -38,6 +41,7 @@ class EducationTableRow extends Component {
             onChange={handleChange}
             disabled={disabled}
           />
+          {!disabled && <div className='text-danger'>{errors.institution}</div>}
         </td>
         <td>
           {disabled ? level : (
@@ -61,6 +65,7 @@ class EducationTableRow extends Component {
             onChange={handleChange}
             disabled={disabled}
           />
+          {!disabled && <div className='text-danger'>{errors.board}</div>}
         </td>
         <td>
           {
@@ -73,6 +78,10 @@ class EducationTableRow extends Component {
               disabled={disabled}
             /> : "Not completed"
           }
+          {!disabled && ((errors.passed_year && (
+            <div className='text-danger'>{errors.passed_year}</div>
+          )) ||
+            '(Leave empty if pending)')}
         </td>
         <td>
           {

@@ -51,7 +51,8 @@ class EducationInfo extends Component {
       const inputField = prevState.inputField.id ? {} : education;
       return {
         inputField,
-        isAddRowVisible: false
+        isAddRowVisible: false,
+        errors: {}
       };
     });
   };
@@ -59,7 +60,13 @@ class EducationInfo extends Component {
   updateEducationField = () => {
     const { inputField } = this.state;
     const { id } = inputField;
-    EducationApi.update(inputField, id)
+
+    const { passed_year, ...other } = inputField;
+    const updateData = passed_year
+      ? inputField
+      : { ...other, passed_year: null };
+
+    EducationApi.update(updateData, id)
       .then(() => {
         Toaster.getSuccessToaster('Successfully updated education');
         this.clearEdit();
@@ -74,7 +81,10 @@ class EducationInfo extends Component {
     const { inputField } = this.state;
     const { userId } = this.props;
 
-    EducationApi.addNew(inputField, userId).then(({ data }) => {
+    const { passed_year, ...other } = inputField;
+    const addData = passed_year ? inputField : other;
+
+    EducationApi.addNew(addData, userId).then(({ data }) => {
       Toaster.getSuccessToaster('Successfully added education');
       this.toggleAddNew();
       this.fetchAll();
@@ -106,7 +116,8 @@ class EducationInfo extends Component {
   toggleAddNew = () => {
     this.setState(({ isAddRowVisible }) => ({
       isAddRowVisible: !isAddRowVisible,
-      inputField: newData
+      inputField: newData,
+      errors: {}
     }));
   };
 
@@ -137,11 +148,17 @@ class EducationInfo extends Component {
     const keys = Object.keys(data);
     keys.forEach(key => {
       if (key == 'passed_year') {
-        return;
+        if (!inputField[key]) return;
       }
       const value = inputField[key];
-      const currentFieldIsValid = !!value;
-      if (!currentFieldIsValid) errors[key] = 'This field is required';
+      let currentFieldIsValid = !!value;
+      if (!currentFieldIsValid) errors[key] = 'Enter valid details';
+      if (key == 'passed_year') {
+        if (inputField[key] < 1956 || inputField[key] > 2020){
+          errors[key] = 'Enter valid date ';
+          currentFieldIsValid = false;
+        }
+      }
       isValid = isValid && currentFieldIsValid;
     });
 
@@ -205,7 +222,7 @@ class EducationInfo extends Component {
               <td>Institution</td>
               <td>Level</td>
               <td>Board</td>
-              <td>Passed Year</td>
+              <td>Passed Year (AD)</td>
               <td>Action</td>
             </tr>
           </thead>
@@ -222,6 +239,7 @@ class EducationInfo extends Component {
                   education={education}
                   inputField={inputField}
                   toggleDeleteModal={this.toggleDeleteModal}
+                  errors={errors}
                 />
               );
             })}
