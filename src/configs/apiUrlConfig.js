@@ -1,6 +1,6 @@
 class ApiUrlConfig {
   constructor() {
-    this.endPoint = "http://adhyaya-dev.herokuapp.com";
+    this.endPoint = "https://adhyaya-dev.herokuapp.com";
   }
 
   apiEndPoint() {
