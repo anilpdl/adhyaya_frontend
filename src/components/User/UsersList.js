@@ -8,13 +8,18 @@ import UserApi from 'apis/User';
 import { formatDate } from 'utils/dataFormatter';
 import { insertIdToUrl } from '../../utils/routes';
 import ROUTES from '../../constants/Routes';
+import Filter from '../Filter/Filter';
 
 class UsersList extends Component {
   constructor() {
     super();
     this.state = {
       users: [],
-      isLoading: false
+      isLoading: false,
+      filter: {
+        endDate: null,
+        startDate: null,
+      },
     };
   }
 
@@ -34,42 +39,74 @@ class UsersList extends Component {
       });
   };
 
-  handleRoute = id => {
+  handleRoute = (id) => {
     const { history } = this.props;
     history.push(insertIdToUrl(ROUTES.STUDENT_DATA, id));
   };
 
-  renderTableContent = content => {
+  onDateChange = ({ startDate, endDate }) => {
+    this.setState({
+      filter: { startDate, endDate },
+    });
+  };
+
+  renderTableContent = (content) => {
     if (content.length) {
       return content;
     }
 
     return (
       <tr>
-        <td className='text-center' colSpan={4}>
+        <td className="text-center" colSpan={4}>
           No data to display
         </td>
       </tr>
     );
   };
 
-  navigateToFilesList = id => {
+  navigateToFilesList = (id) => {
     const { history } = this.props;
 
     history.push(`${ROUTES.FILES_INDEX}?id=${id}`);
   };
 
+  filterUsersList = (users) => {
+    const {
+      filter: { startDate, endDate },
+    } = this.state;
+
+    let filteredUsers = users;
+
+    if (startDate && endDate) {
+      filteredUsers = users.filter(({ created_at }) => {
+        const createdDate = moment(created_at);
+        const isBetween = createdDate.isBetween(
+          moment(startDate).subtract(1, 'day'),
+          moment(endDate).add(1, 'day')
+        );
+
+        return isBetween;
+      });
+    }
+
+    return filteredUsers;
+  };
+
   render() {
     const { users, isLoading } = this.state;
-    const usersList = users.map(
+
+    const filteredUsers = this.filterUsersList(users);
+
+    const usersList = filteredUsers.map(
       ({ id, first_name, last_name, email, created_at, last_login }, index) => {
         const name = `${first_name} ${last_name}`;
         const lastLogin = moment(formatDate(last_login || created_at))
           .startOf()
           .fromNow();
+
         return (
           <tr
-            className='cursor-pointer'
+            className="cursor-pointer"
             key={id}
             onClick={() => this.handleRoute(id)}
           >
@@ -80,8 +117,8 @@ class UsersList extends Component {
             <td> {lastLogin} </td>
             <td>
               <button
-                className='btn btn-sm btn-primary'
-                onClick={e => {
+                className="btn btn-sm btn-primary"
+                onClick={(e) => {
                   e.stopPropagation();
                   this.navigateToFilesList(id);
                 }}
@@ -95,7 +132,7 @@ class UsersList extends Component {
     );
     if (isLoading) {
       return (
-        <div className='panel__refresh'>
+        <div className="panel__refresh">
           <LoadingIcon />
         </div>
       );
@@ -105,13 +142,18 @@ class UsersList extends Component {
       <Col md={12} lg={12}>
         <Card>
           <CardBody>
-            <div className='card__title'>
-              <h5 className='bold-text'>Students List</h5>
-              <h5 className='subhead'>
-                Signed up <span className='red-text'>students list</span>
-              </h5>
+            <div className="card__title">
+              <Col md={12} lg={6}>
+                <h5 className="bold-text">Students List</h5>
+                <h5 className="subhead">
+                  Signed up <span className="red-text">students list</span>
+                </h5>
+              </Col>
+              <Col md={12} lg={6}>
+                <Filter onDateChange={this.onDateChange} />
+              </Col>
             </div>
-            <Table responsive className='table--bordered table-hover'>
+            <Table responsive className="table--bordered table-hover">
               <thead>
                 <tr>
                   <th></th>

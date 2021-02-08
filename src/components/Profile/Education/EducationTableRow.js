@@ -23,8 +23,6 @@ class EducationTableRow extends Component {
       errors
     } = this.props;
 
-    console.log(errors)
-
     const disabled = inputField.id !== education.id;
     const displayData = disabled ? education : inputField;
     const { id, institution, level, board, passed_year } = displayData;

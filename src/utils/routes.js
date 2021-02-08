@@ -4,7 +4,6 @@ export const insertIdToUrl = (url, id) => {
 
 export const fetchQueryParams = (url) => {
   if (url) {
-    console.log(url.replace('?', '').split('='))
     return parseInt(url.replace('?', '').split('=')[1]);
   }
 
